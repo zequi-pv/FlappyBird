@@ -145,11 +145,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="src\Bird.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="src\Bird.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\WindowSize.h" />

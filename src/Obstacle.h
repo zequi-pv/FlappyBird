@@ -1,0 +1,16 @@
+#include "raylib.h"
+struct Obstacle
+{
+	Vector2 pos;
+	Vector2 size;
+	float speed;
+	Color color;
+	bool hit;
+};
+
+void CalculateRandom(Obstacle& obstacle);
+Obstacle CreateObstacle();
+void MoveObstacle(Obstacle& obstacle);
+void DrawObstacle(Obstacle& obstacle);
+void UpdateObstacle(Obstacle& obstacle);
+Rectangle GetRecObstacle(Obstacle& obstacle);

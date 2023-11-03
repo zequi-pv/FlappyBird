@@ -3,6 +3,7 @@
 #include<iostream>
 #include"WindowSize.h"
 #include"Bird.h"
+#include"../Obstacle.h"
 
 
 using namespace std;
@@ -22,6 +23,7 @@ void InitializTexts();*/
 
 
 Bird bird;
+Obstacle obstacle;
 
 /*static*/ bool exitWindow = false;
 /*static*/ bool pause = false;
@@ -42,6 +44,7 @@ static void Init()
 	InitWindow(static_cast<int>(SCREEN_WIDTH), static_cast<int>(SCREEN_HEIGTH), "ASTEROIDS");
 	SetExitKey(KEY_NULL);
 	bird = CreateBird();
+	obstacle = CreateObstacle();
 }
 
 /*static*/ void MainLoop()
@@ -60,6 +63,7 @@ static void Init()
 void Update()
 {
 	UpdateBird(bird);
+	UpdateObstacle(obstacle);
 }
 
 /*static*/ void Close()
@@ -75,6 +79,7 @@ void Update()
 	DrawRectangle(GetScreenWidth() - 5, 0, 5, GetScreenHeight(), Fade(WHITE, 1.0f));
 
 	DrawBird(bird);
+	DrawObstacle(obstacle);
 	//if (pause)
 	//{
 	//	//DrawPause();
@@ -83,12 +88,12 @@ void Update()
 	//{
 	//	
 	//}
-
+	DrawCredit();
 	EndDrawing();
 }
 /*static*/ void DrawCredit()
 {
-	DrawText(TextFormat("Credit: Leonardo Brizuela"), GetScreenWidth() / 2 - 300, GetScreenHeight() / 2 + 100, 40, WHITE);
+	DrawText(TextFormat("Credit: Leonardo Brizuela, V 0.1"), GetScreenWidth() / 2 - 500, GetScreenHeight() / 2 + 350, 25, RED);
 }
 
 /*static*/ void GameLoop()

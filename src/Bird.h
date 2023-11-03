@@ -14,3 +14,4 @@ Bird CreateBird();
 void DrawBird(Bird bird);
 void MoveBird(Bird& bird);
 void UpdateBird(Bird& bird);
+Rectangle GetBirdRect(Bird bird);
