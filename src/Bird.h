@@ -7,10 +7,10 @@ struct Bird
     Vector2 size;
     float speed;
     Color color;
-  
+    Texture2D texture;
 };
 
-Bird CreateBird();
+Bird CreateBird(Texture2D birdTexture );
 void DrawBird(Bird bird);
 void MoveBird(Bird& bird);
 void UpdateBird(Bird& bird);

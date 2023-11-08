@@ -1,10 +1,8 @@
-#include"Game.h"
-#include"raylib.h"
 #include<iostream>
+#include"Game.h"
 #include"WindowSize.h"
 #include"Bird.h"
-#include"../Obstacle.h"
-
+#include"Obstacle.h"
 
 using namespace std;
 
@@ -12,6 +10,7 @@ static void Init();
 static void MainLoop();
 static void Close();
 void Update();
+void BirdCollition(Bird& bird, Obstacle& obstacle);
 //void DrawPause();
 /*static void Draw();
 static void DrawCredit();
@@ -20,8 +19,7 @@ void WindowInstructions();
 void UpdateMenu();
 void CreditsWindow();
 void InitializTexts();*/
-
-
+Texture2D playerTexture;
 Bird bird;
 Obstacle obstacle;
 
@@ -43,7 +41,8 @@ static void Init()
 {
 	InitWindow(static_cast<int>(SCREEN_WIDTH), static_cast<int>(SCREEN_HEIGTH), "ASTEROIDS");
 	SetExitKey(KEY_NULL);
-	bird = CreateBird();
+	playerTexture = LoadTexture("res/playerShip2_orange.png");
+	bird = CreateBird(playerTexture);
 	obstacle = CreateObstacle();
 }
 
@@ -64,10 +63,12 @@ void Update()
 {
 	UpdateBird(bird);
 	UpdateObstacle(obstacle);
+	BirdCollition(bird,obstacle);
 }
 
 /*static*/ void Close()
 {
+	UnloadTexture(playerTexture);
 	CloseWindow();
 }
 
@@ -123,11 +124,22 @@ void Update()
 	//		
 	//	}
 	//}
-
 	Update();
 	Draw();
 }
 
+void BirdCollition(Bird& player, Obstacle& obs)
+{
+	if (CheckCollisionRecs(GetBirdRect(player),GetRecObstacle(obs)))
+	{
+		player.vidas-=1;
+		bird.pos = { static_cast<float>(GetScreenWidth() / 2) - 500, static_cast<float> (GetScreenHeight() / 2) };
+		#ifdef _DEBUG
+				cout << "vidas" << player.vidas << endl;
+		#endif
+	}
+
+}
 //void WindowInstructions()
 //{
 //	BeginDrawing();

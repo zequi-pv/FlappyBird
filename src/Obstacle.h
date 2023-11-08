@@ -1,4 +1,5 @@
 #include "raylib.h"
+
 struct Obstacle
 {
 	Vector2 pos;
@@ -8,7 +9,7 @@ struct Obstacle
 	bool hit;
 };
 
-void CalculateRandom(Obstacle& obstacle);
+void InitRandom();
 Obstacle CreateObstacle();
 void MoveObstacle(Obstacle& obstacle);
 void DrawObstacle(Obstacle& obstacle);

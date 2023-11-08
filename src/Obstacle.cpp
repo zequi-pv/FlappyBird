@@ -1,28 +1,43 @@
 #include "Obstacle.h"
+#include<iostream>
+#include <ctime>
+using namespace std;
+bool randomInitialized = false;
 
-//void CalculateRandom(Obstacle& obstacle)
-//{
-//}
+void InitRandom()
+{
+    if (!randomInitialized)
+    {
+        srand(static_cast<unsigned>(time(nullptr)));
+        randomInitialized = true;
+    }
+}
 
 Obstacle CreateObstacle()
 {
-	Obstacle obstacle;
-	obstacle.pos = { static_cast<float>(GetScreenWidth() / 2) - 500, static_cast<float> (GetScreenHeight() / 2) };
-	obstacle.size = { 50,110 };
-	obstacle.speed = 100;
-	obstacle.color = BLUE;
-	return obstacle;
+    Obstacle obstacle;
+    obstacle.size = { 50, 110 };
+    obstacle.speed = 500;
+    obstacle.color = BLUE;
+    obstacle.pos = { static_cast<float>(GetScreenWidth()), static_cast<float>(rand() % GetScreenHeight()) };
+
+    return obstacle;
 }
 
 void MoveObstacle(Obstacle& obstacle)
-{
-	obstacle.pos.x = obstacle.speed * GetFrameTime();
-	
+{ 
+    obstacle.pos.x -= obstacle.speed * GetFrameTime();
+
+    if (obstacle.pos.x + obstacle.size.x < 0)
+    {
+        obstacle.pos.x = static_cast<float>(GetScreenWidth());
+        obstacle.pos.y = static_cast<float>(rand() % GetScreenHeight());
+    }
 }
 
 void DrawObstacle(Obstacle& obstacle)
 {
-	DrawRectangle(obstacle.pos.x - obstacle.size.x, obstacle.pos.y - obstacle.size.y, obstacle.size.x, obstacle.size.y, obstacle.color);
+	DrawRectangle(static_cast<int>(obstacle.pos.x) - static_cast<int>(obstacle.size.x), static_cast<int>(obstacle.pos.y) - static_cast<int>(obstacle.size.y), static_cast<int>(obstacle.size.x), static_cast<int>(obstacle.size.y),obstacle.color);
 }
 
 void UpdateObstacle(Obstacle& obstacle)
