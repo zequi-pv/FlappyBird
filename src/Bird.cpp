@@ -12,8 +12,10 @@ Bird CreateBird(Texture2D birdTexture)
 	bird.size = { 50,50 };
 	bird.vidas = 3;
 	bird.speed = 100;
+	bird.maxSpeed = 150.0f;
 	bird.color = RED;
 	bird.texture = birdTexture;
+	bird.isJumping = false;
 	return bird;
 }
 
@@ -25,22 +27,28 @@ void DrawBird(Bird bird)
 
 void MoveBird(Bird& bird)
 {
-	if (IsKeyDown(KEY_UP) && bird.pos.y > 0)
-	{
-	    bird.pos.y -=bird.speed* GetFrameTime();
-       
-        #ifdef _DEBUG
-		cout << "y:" << bird.pos.y << endl;
-        #endif
-	}
-	if (IsKeyDown(KEY_DOWN) && bird.pos.y < GetScreenHeight()-50)
-	{
-		bird.pos.y += bird.speed * GetFrameTime();
+	/*bird.pos.y += bird.speed * GetFrameTime();*/
+	/*if (bird.pos.y > 0|| bird.pos.y < GetScreenHeight() - 50)
+	{*/
+		if (IsKeyPressed(KEY_SPACE) && bird.pos.y > 0)
+		{
+			bird.pos.y -=500  * bird.speed * GetFrameTime();
+			
 
-		#ifdef _DEBUG
-				cout << "y:" << bird.pos.y << endl;
-		#endif	
-	}
+
+#ifdef _DEBUG
+			cout << "y:" << bird.pos.y << endl;
+#endif
+		}
+		else if (bird.pos.y < GetScreenHeight() - 50)
+		{
+			bird.pos.y += 1 * bird.speed * GetFrameTime();
+
+#ifdef _DEBUG
+			cout << "y:" << bird.pos.y << endl;
+#endif	
+		}	
+	/*}*/
 }
 
 void UpdateBird(Bird& bird)
@@ -52,3 +60,13 @@ Rectangle GetBirdRect(Bird bird)
 {
 	return Rectangle{bird.pos.x - bird.size.x / 2,bird.pos.y - bird.size.y / 2, bird.size.x,bird.size.y };
 }
+
+//void BirdInput(Bird bird)
+//{
+//	if (IsKeyPressed(KEY_SPACE)&&!bird.isJumping)
+//	{
+//		
+//	}
+//
+//
+//}

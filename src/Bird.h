@@ -3,15 +3,18 @@
 struct Bird
 {
     Vector2 pos;
-    short int vidas;
-    Vector2 size;
-    float speed;
-    Color color;
     Texture2D texture;
+    Vector2 size;
+    Color color;
+    short int vidas;
+    float speed;
+    float maxSpeed;
+    bool isJumping;
 };
 
-Bird CreateBird(Texture2D birdTexture );
+Bird CreateBird(Texture2D birdTexture);
 void DrawBird(Bird bird);
 void MoveBird(Bird& bird);
 void UpdateBird(Bird& bird);
 Rectangle GetBirdRect(Bird bird);
+void BirdInput(Bird bird);

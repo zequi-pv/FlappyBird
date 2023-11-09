@@ -15,3 +15,4 @@ void MoveObstacle(Obstacle& obstacle);
 void DrawObstacle(Obstacle& obstacle);
 void UpdateObstacle(Obstacle& obstacle);
 Rectangle GetRecObstacle(Obstacle& obstacle);
+void ResetObject(Obstacle obstacle);
