@@ -8,8 +8,8 @@ struct Bird
     Color color;
     short int vidas;
     float speed;
-    float maxSpeed;
-    bool isJumping;
+    float aceleration;
+    float gravity;
 };
 
 Bird CreateBird(Texture2D birdTexture);
