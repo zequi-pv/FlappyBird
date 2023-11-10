@@ -78,7 +78,8 @@ void Update()
 	ClearBackground(WHITE);
 	DrawRectangle(0, 0, 5, GetScreenHeight(), Fade(WHITE, 1.0f));
 	DrawRectangle(GetScreenWidth() - 5, 0, 5, GetScreenHeight(), Fade(WHITE, 1.0f));
-
+	DrawRectangleRec(GetBirdRect(bird), BLACK);
+	DrawRectangleRec(GetRecObstacle(obstacle), GREEN);
 	DrawBird(bird);
 	DrawObstacle(obstacle);
 	//if (pause)
@@ -130,6 +131,7 @@ void Update()
 
 void BirdCollition(Bird& player, Obstacle& obs)
 {
+
 	if (CheckCollisionRecs(GetBirdRect(player),GetRecObstacle(obs)))
 	{
 		player.vidas-=1;

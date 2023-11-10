@@ -28,32 +28,34 @@ void DrawBird(Bird bird)
 
 void MoveBird(Bird& bird)
 {
-    if (bird.pos.y>0&&bird.size.y > 0)
+   /* cout << "y: " << bird.pos.y << endl;*/
+    if (bird.pos.y<0)
     {
-        if (IsKeyPressed(KEY_SPACE))
-        {
-            bird.aceleration = 0.0f;
-            bird.speed = bird.gravity / 2;
-            cout << "aceleration: " << bird.aceleration << endl;
-            cout << "gravity: " << bird.gravity << endl;
-            cout << "speed: " << bird.speed << endl;
-            cout << "y: " << bird.pos.y << endl;
-        }
-        else
-        {
-            if (bird.aceleration >= bird.gravity)
-            {
-                bird.aceleration = bird.gravity;
-            }
+        bird.pos.y = 0;
+    }
+    if (IsKeyPressed(KEY_SPACE))
+    {
+        bird.aceleration = 0.0f;
+        bird.speed = bird.gravity / 2;
+       /* cout << "aceleration: " << bird.aceleration << endl;
+        cout << "gravity: " << bird.gravity << endl;
+        cout << "speed: " << bird.speed << endl;*/
 
-            bird.aceleration += bird.gravity * GetFrameTime();
-            bird.speed -= bird.aceleration * GetFrameTime();
-            bird.pos.y -= bird.speed * GetFrameTime();
-            cout << "aceleration: " << bird.aceleration << endl;
-            cout << "gravity: " << bird.gravity << endl;
-            cout << "speed: " << bird.speed << endl;
-            cout << "y: " << bird.pos.y << endl;
+    }
+    else
+    {
+        if (bird.aceleration >= bird.gravity)
+        {
+            bird.aceleration = bird.gravity;
         }
+
+        bird.aceleration += bird.gravity * GetFrameTime();
+        bird.speed -= bird.aceleration * GetFrameTime();
+        bird.pos.y -= bird.speed * GetFrameTime();
+      /*  cout << "aceleration: " << bird.aceleration << endl;
+        cout << "gravity: " << bird.gravity << endl;
+        cout << "speed: " << bird.speed << endl;
+        cout << "y: " << bird.pos.y << endl;*/
     }
 }
 

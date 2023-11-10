@@ -37,7 +37,7 @@ void MoveObstacle(Obstacle& obstacle)
 
 void DrawObstacle(Obstacle& obstacle)
 {
-	DrawRectangle(static_cast<int>(obstacle.pos.x) - static_cast<int>(obstacle.size.x), static_cast<int>(obstacle.pos.y) - static_cast<int>(obstacle.size.y), static_cast<int>(obstacle.size.x), static_cast<int>(obstacle.size.y),obstacle.color);
+	DrawRectangle(static_cast<int>(obstacle.pos.x) , static_cast<int>(obstacle.pos.y) , static_cast<int>(obstacle.size.x), static_cast<int>(obstacle.size.y),obstacle.color);
 }
 
 void UpdateObstacle(Obstacle& obstacle)
@@ -47,7 +47,7 @@ void UpdateObstacle(Obstacle& obstacle)
 
 Rectangle GetRecObstacle(Obstacle& obstacle)
 {
-	return Rectangle{ obstacle.pos.x - obstacle.size.x / 2, obstacle.pos.y - obstacle.size.y / 2, obstacle.size.x, obstacle.size.y };
+	return Rectangle{ obstacle.pos.x , obstacle.pos.y , obstacle.size.x, obstacle.size.y };
 }
 
 void ResetObject(Obstacle obstacle)
