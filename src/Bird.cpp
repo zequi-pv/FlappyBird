@@ -66,5 +66,5 @@ void UpdateBird(Bird& bird)
 
 Rectangle GetBirdRect(Bird bird)
 {
-	return Rectangle{bird.pos.x - bird.size.x / 2,bird.pos.y - bird.size.y / 2, bird.size.x,bird.size.y };
+	return Rectangle{bird.pos.x ,bird.pos.y , bird.size.x,bird.size.y };
 }

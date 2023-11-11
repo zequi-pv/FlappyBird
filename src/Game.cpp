@@ -132,13 +132,18 @@ void Update()
 void BirdCollition(Bird& player, Obstacle& obs)
 {
 
-	if (CheckCollisionRecs(GetBirdRect(player),GetRecObstacle(obs)))
+	if (!obs.hit && CheckCollisionRecs(GetBirdRect(player),GetRecObstacle(obs)))
 	{
+		//obs.hit = true;
 		player.vidas-=1;
 		bird.pos = { static_cast<float>(GetScreenWidth() / 2) - 500, static_cast<float> (GetScreenHeight() / 2) };
 		#ifdef _DEBUG
 				cout << "vidas" << player.vidas << endl;
 		#endif
+	}
+	else
+	{
+		obs.hit = false;
 	}
 
 }

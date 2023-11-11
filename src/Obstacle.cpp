@@ -19,6 +19,7 @@ Obstacle CreateObstacle()
     obstacle.size = { 50, 110 };
     obstacle.speed = 500;
     obstacle.color = BLUE;
+    obstacle.hit = false;
     obstacle.pos = { static_cast<float>(GetScreenWidth()), static_cast<float>(rand() % GetScreenHeight()) };
 
     return obstacle;
