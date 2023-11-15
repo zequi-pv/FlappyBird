@@ -131,20 +131,57 @@ void Update()
 
 void BirdCollition(Bird& player, Obstacle& obs)
 {
+	static float timeSinceLastCollision = 0.0f;
+	/*static bool collided = false;*/
+	static float collisionTimer = 0.0f;
+	timeSinceLastCollision += GetFrameTime();
 
-	if (!obs.hit && CheckCollisionRecs(GetBirdRect(player),GetRecObstacle(obs)))
+	// Definir un intervalo de tiempo entre colisiones (por ejemplo, 1 segundo)
+	float collisionInterval = 1.0f;
+
+	if (timeSinceLastCollision > collisionInterval)
 	{
-		//obs.hit = true;
-		player.vidas-=1;
-		bird.pos = { static_cast<float>(GetScreenWidth() / 2) - 500, static_cast<float> (GetScreenHeight() / 2) };
-		#ifdef _DEBUG
-				cout << "vidas" << player.vidas << endl;
-		#endif
+
+		if (!obs.hit && CheckCollisionRecs(GetBirdRect(player), GetRecObstacle(obs))||player.pos.y>GetScreenHeight())
+		{
+
+
+			obs.hit = true;
+			player.vidas -= 1;
+			player.color = BLUE;
+			player.speed = 0.0f;
+			collisionTimer = 1.0f;
+
+			// Restablecer la posición del jugador
+			player.pos = { static_cast<float>(GetScreenWidth() / 2) - 500, static_cast<float>(GetScreenHeight() / 2) };
+
+#ifdef _DEBUG
+			cout << "vidas: " << player.vidas << endl;
+#endif
+
+			// Reiniciar el tiempo desde la última colisión
+			timeSinceLastCollision = 0.0f;
+
+
+		}
+
+
 	}
-	else
+	if(obs.hit==true)
 	{
-		obs.hit = false;
+		collisionTimer -= GetFrameTime();
+
+		if (collisionTimer<=0.0f)
+		{
+			obs.hit = false;
+			player.color = RED;
+		}
+		
 	}
+
+	timeSinceLastCollision += GetFrameTime();
+
+	cout << "tiempo: " << timeSinceLastCollision << endl;
 
 }
 //void WindowInstructions()
