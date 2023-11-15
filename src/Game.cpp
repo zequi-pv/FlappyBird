@@ -3,6 +3,7 @@
 #include"WindowSize.h"
 #include"Bird.h"
 #include"Obstacle.h"
+#include"Menu.h"
 
 using namespace std;
 
@@ -11,7 +12,7 @@ static void MainLoop();
 static void Close();
 void Update();
 void BirdCollition(Bird& bird, Obstacle& obstacle);
-//void DrawPause();
+void DrawPause();
 /*static void Draw();
 static void DrawCredit();
 void GameLoop();
@@ -41,6 +42,7 @@ static void Init()
 {
 	InitWindow(static_cast<int>(SCREEN_WIDTH), static_cast<int>(SCREEN_HEIGTH), "ASTEROIDS");
 	SetExitKey(KEY_NULL);
+	InitializeTexts();
 	playerTexture = LoadTexture("res/playerShip2_orange.png");
 	bird = CreateBird(playerTexture);
 	obstacle = CreateObstacle();
@@ -52,8 +54,8 @@ static void Init()
 	{
 		while (!WindowShouldClose() && !salir)
 		{
-			GameLoop();
-			//ScenesSwitch();
+			//GameLoop();
+			ScenesSwitch();
 			exitWindow = true;
 		}
 	}
@@ -78,19 +80,20 @@ void Update()
 	ClearBackground(WHITE);
 	DrawRectangle(0, 0, 5, GetScreenHeight(), Fade(WHITE, 1.0f));
 	DrawRectangle(GetScreenWidth() - 5, 0, 5, GetScreenHeight(), Fade(WHITE, 1.0f));
-	DrawRectangleRec(GetBirdRect(bird), BLACK);
-	DrawRectangleRec(GetRecObstacle(obstacle), GREEN);
-	DrawBird(bird);
-	DrawObstacle(obstacle);
-	//if (pause)
-	//{
-	//	//DrawPause();
-	//}
-	//else
-	//{
-	//	
-	//}
-	DrawCredit();
+	
+	if (pause)
+	{
+		DrawPause();
+	}
+	else
+	{
+		DrawRectangleRec(GetBirdRect(bird), BLACK);
+		DrawRectangleRec(GetRecObstacle(obstacle), GREEN);
+		DrawBird(bird);
+		DrawObstacle(obstacle);
+		DrawCredit();
+	}
+	
 	EndDrawing();
 }
 /*static*/ void DrawCredit()
@@ -100,32 +103,37 @@ void Update()
 
 /*static*/ void GameLoop()
 {
-	//if (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_P))
-	//{
-	//	pause = !pause;
-	//	cout << "pause" << endl;
-	//	cout << pause << endl;
-	//	//DrawPause();
-	//}
+	if (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_P))
+	{
+		pause = !pause;
+		cout << "pause" << endl;
+		cout << pause << endl;
+		//DrawPause();
+	}
 
-	//if (!pause)
-	//{
-	//	Update();
-	//}
-	//else
-	//{
-	//	DrawPause();
+	if (!pause)
+	{
+		Update();
+	}
+	else
+	{
+		DrawPause();
 
-	//	if (IsKeyPressed(KEY_R))
-	//	{
-	//		
-	//	}
-	//	else if (IsKeyPressed(KEY_ESCAPE))
-	//	{
-	//		
-	//	}
-	//}
-	Update();
+		if (IsKeyPressed(KEY_R))
+		{
+			bird = CreateBird(playerTexture);
+			obstacle = CreateObstacle();
+			pause = false;
+		}
+		else if (IsKeyPressed(KEY_ESCAPE))
+		{
+			menu = MenuScenes::MainMenu;
+			bird = CreateBird(playerTexture);
+			obstacle = CreateObstacle();
+			pause = false;
+		}
+	}
+	//Update();
 	Draw();
 }
 
@@ -184,68 +192,69 @@ void BirdCollition(Bird& player, Obstacle& obs)
 	cout << "tiempo: " << timeSinceLastCollision << endl;
 
 }
-//void WindowInstructions()
-//{
-//	BeginDrawing();
-//
-//	DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, 1024, 768, BEIGE, Fade(RED, 1.0f));
-//	DrawText("Use Up/Down to move rigth paddles", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 10, 40, WHITE);
-//	DrawText("Use W/S to move left paddles", GetScreenWidth() / 2 - 300, GetScreenHeight() / 2 - 100, 40, WHITE);
-//	//DrawText("(ESC) Back", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 + 200, 40, WHITE);
-//
-//	DrawBack();
-//	CheckBack();
-//	EndDrawing();
-//
-//	backMenu();
-//}
-//
-//void UpdateMenu()
-//{
-//	CheckSinglePlayer();
-//	CheckInstructions();
-//	CheckCredits();
-//	CheckBack();
-//	CheckQuit();
-//}
-//
-//void CreditsWindow()
-//{
-//	BeginDrawing();
-//
-//	DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, 1024, 768, BEIGE, Fade(RED, 1.0f));
-//	DrawText("Code by: Leonardo Brizuela", GetScreenWidth() / 2 - 300, GetScreenHeight() / 2 - 10, 40, WHITE);
-//	//DrawText("(ESC) Back", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 + 200, 40, WHITE);
-//	DrawBack();
-//	CheckBack();
-//	EndDrawing();
-//	backMenu();
-//
-//
-//}
-//
-//void backMenu()
-//{
-//	if (IsKeyPressed(KEY_ESCAPE))
-//	{
-//		menu = MenuScenes::MainMenu;
-//	}
-//}
-//
-//void DrawPause()
-//{
-//	BeginDrawing();
-//
-//	DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, 1024, 768, BEIGE, Fade(RED, 1.0f));
-//	DrawText("Pause", GetScreenWidth() / 2 - 140, GetScreenHeight() / 2 - 250, 100, WHITE);
-//	DrawText("Press (P) to continue the game ", GetScreenWidth() / 2 - 330, GetScreenHeight() / 2, 38, WHITE);
-//	DrawText("Press (R) to restart the game ", GetScreenWidth() / 2 - 330, GetScreenHeight() / 2 - 100, 38, WHITE);
-//	DrawText("Press (ESC) back to menu ", GetScreenWidth() / 2 - 330, GetScreenHeight() / 2 - 50, 38, WHITE);
-//	DrawBack();
-//	DrawCredit();
-//
-//	EndDrawing();
-//}
+
+void WindowInstructions()
+{
+	BeginDrawing();
+
+	DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, 1024, 768, BEIGE, Fade(RED, 1.0f));
+	DrawText("Use Up/Down to move rigth paddles", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 - 10, 40, WHITE);
+	DrawText("Use W/S to move left paddles", GetScreenWidth() / 2 - 300, GetScreenHeight() / 2 - 100, 40, WHITE);
+	//DrawText("(ESC) Back", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 + 200, 40, WHITE);
+
+	DrawBack();
+	CheckBack();
+	EndDrawing();
+
+	backMenu();
+}
+
+void UpdateMenu()
+{
+	CheckSinglePlayer();
+	CheckInstructions();
+	CheckCredits();
+	CheckBack();
+	CheckQuit();
+}
+
+void CreditsWindow()
+{
+	BeginDrawing();
+
+	DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, 1024, 768, BEIGE, Fade(RED, 1.0f));
+	DrawText("Code by: Leonardo Brizuela", GetScreenWidth() / 2 - 300, GetScreenHeight() / 2 - 10, 40, WHITE);
+	//DrawText("(ESC) Back", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 + 200, 40, WHITE);
+	DrawBack();
+	CheckBack();
+	EndDrawing();
+	backMenu();
+
+
+}
+
+void backMenu()
+{
+	if (IsKeyPressed(KEY_ESCAPE))
+	{
+		menu = MenuScenes::MainMenu;
+	}
+}
+
+void DrawPause()
+{
+	BeginDrawing();
+
+	DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, 1024, 768, BEIGE, Fade(RED, 1.0f));
+	DrawText("Pause", GetScreenWidth() / 2 - 140, GetScreenHeight() / 2 - 250, 100, WHITE);
+	DrawText("Press (P) to continue the game ", GetScreenWidth() / 2 - 330, GetScreenHeight() / 2, 38, WHITE);
+	DrawText("Press (R) to restart the game ", GetScreenWidth() / 2 - 330, GetScreenHeight() / 2 - 100, 38, WHITE);
+	DrawText("Press (ESC) back to menu ", GetScreenWidth() / 2 - 330, GetScreenHeight() / 2 - 50, 38, WHITE);
+	DrawBack();
+	DrawCredit();
+
+	EndDrawing();
+}
 //
 //void ButtomPause()
 //{

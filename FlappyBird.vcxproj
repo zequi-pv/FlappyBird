@@ -154,11 +154,13 @@
     <ClCompile Include="src\Bird.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\Obstacle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Bird.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\Menu.h" />
     <ClInclude Include="src\Obstacle.h" />
     <ClInclude Include="src\WindowSize.h" />
   </ItemGroup>
