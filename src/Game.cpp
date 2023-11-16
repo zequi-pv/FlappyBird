@@ -27,6 +27,7 @@ Obstacle obstacle;
 /*static*/ bool exitWindow = false;
 /*static*/ bool pause = false;
 /*static*/ bool salir = false;
+bool endmatch = false;
 
 namespace game
 {
@@ -54,7 +55,6 @@ static void Init()
 	{
 		while (!WindowShouldClose() && !salir)
 		{
-			//GameLoop();
 			ScenesSwitch();
 			exitWindow = true;
 		}
@@ -80,20 +80,21 @@ void Update()
 	ClearBackground(WHITE);
 	DrawRectangle(0, 0, 5, GetScreenHeight(), Fade(WHITE, 1.0f));
 	DrawRectangle(GetScreenWidth() - 5, 0, 5, GetScreenHeight(), Fade(WHITE, 1.0f));
-	
-	if (pause)
+	if(!endmatch)
 	{
-		DrawPause();
+		if (pause)
+		{
+			DrawPause();
+		}
+		else
+		{
+			DrawRectangleRec(GetBirdRect(bird), BLACK);
+			DrawRectangleRec(GetRecObstacle(obstacle), GREEN);
+			DrawBird(bird);
+			DrawObstacle(obstacle);
+			DrawCredit();
+		}
 	}
-	else
-	{
-		DrawRectangleRec(GetBirdRect(bird), BLACK);
-		DrawRectangleRec(GetRecObstacle(obstacle), GREEN);
-		DrawBird(bird);
-		DrawObstacle(obstacle);
-		DrawCredit();
-	}
-	
 	EndDrawing();
 }
 /*static*/ void DrawCredit()
@@ -103,27 +104,54 @@ void Update()
 
 /*static*/ void GameLoop()
 {
-	if (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_P))
+	cout << "endmatch " << endmatch<<endl;
+	if (!endmatch)
 	{
-		pause = !pause;
-		cout << "pause" << endl;
-		cout << pause << endl;
-		//DrawPause();
-	}
+		if (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_P))
+		{
+			pause = !pause;
+			cout << "pause" << endl;
+			cout << pause << endl;
+			//DrawPause();
+		}
 
-	if (!pause)
-	{
-		Update();
+		if (!pause)
+		{
+			Update();
+		}
+		else
+		{
+			DrawPause();
+
+			if (IsKeyPressed(KEY_R))
+			{
+				bird = CreateBird(playerTexture);
+				obstacle = CreateObstacle();
+				pause = false;
+			}
+			else if (IsKeyPressed(KEY_E))
+			{
+				menu = MenuScenes::MainMenu;
+				bird = CreateBird(playerTexture);
+				obstacle = CreateObstacle();
+				pause = false;
+			}
+		}
+		
 	}
-	else
+    /*if (endmatch)*/else
 	{
-		DrawPause();
+		
+		DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, 1024, 768, BEIGE, Fade(RED, 1.0f));
+		DrawText(TextFormat("You Lose"), 50, 200, 55, WHITE);
+		DrawText(TextFormat("Press R to play again or Esc to Exit"), 50, 250, 35, WHITE);
 
 		if (IsKeyPressed(KEY_R))
 		{
 			bird = CreateBird(playerTexture);
 			obstacle = CreateObstacle();
 			pause = false;
+			endmatch = false;
 		}
 		else if (IsKeyPressed(KEY_ESCAPE))
 		{
@@ -131,10 +159,12 @@ void Update()
 			bird = CreateBird(playerTexture);
 			obstacle = CreateObstacle();
 			pause = false;
+			endmatch = false;
 		}
+		
 	}
-	//Update();
 	Draw();
+	
 }
 
 void BirdCollition(Bird& player, Obstacle& obs)
@@ -170,11 +200,15 @@ void BirdCollition(Bird& player, Obstacle& obs)
 			// Reiniciar el tiempo desde la última colisión
 			timeSinceLastCollision = 0.0f;
 
-
+			if (player.vidas<=0)
+			{
+				endmatch = true;
+			}
 		}
 
 
 	}
+
 	if(obs.hit==true)
 	{
 		collisionTimer -= GetFrameTime();
@@ -189,7 +223,7 @@ void BirdCollition(Bird& player, Obstacle& obs)
 
 	timeSinceLastCollision += GetFrameTime();
 
-	cout << "tiempo: " << timeSinceLastCollision << endl;
+	//cout << "tiempo: " << timeSinceLastCollision << endl;
 
 }
 
