@@ -208,7 +208,7 @@ void CheckBack()
 void DrawButtons()
 {
 	BeginDrawing();
-	DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, static_cast <int>(SCREEN_WIDTH), static_cast <int>(SCREEN_HEIGTH), BEIGE, Fade(RED, 1.0f));
+	DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, static_cast <int>(SCREEN_WIDTH), static_cast <int>(SCREEN_HEIGTH), BLACK, Fade(RED, 1.0f));
 
 	if (menu == MenuScenes::Instructions || menu == MenuScenes::Credits)
 	{

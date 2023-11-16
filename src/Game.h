@@ -11,7 +11,6 @@ void UpdateMenu();
 void CreditsWindow();
 void backMenu();
 
-
 namespace game
 {
 	void RunGame();

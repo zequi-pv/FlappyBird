@@ -21,6 +21,9 @@
     <ClCompile Include="src\Menu.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\Parallax.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.h">
@@ -36,6 +39,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="src\Menu.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Parallax.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

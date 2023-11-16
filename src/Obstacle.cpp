@@ -1,6 +1,7 @@
 #include "Obstacle.h"
 #include<iostream>
 #include <ctime>
+
 using namespace std;
 bool randomInitialized = false;
 
@@ -16,7 +17,7 @@ void InitRandom()
 Obstacle CreateObstacle()
 {
     Obstacle obstacle;
-    obstacle.size = { 50, 110 };
+    obstacle.size = { 50, 210 };
     obstacle.speed = 500;
     obstacle.color = BLUE;
     obstacle.hit = false;
