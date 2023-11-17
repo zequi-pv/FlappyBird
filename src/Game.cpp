@@ -26,7 +26,7 @@ Parallax foreGround;
 static bool exitWindow = false;
 static bool pause = false;
 static bool endmatch = false;
-bool salir = false;
+bool isGameRunning = false;
 
 namespace game
 {
@@ -47,7 +47,7 @@ static void Init()
 	 //backGround = LoadTexture("res/Background/sCitySky.png");
 	//Texture2D midGround = LoadTexture("res/Background/sCityMid.png");
 	imageTexture= LoadTexture("res/Background/sCityClose.png");
-	foreGround = InitParallax(imageTexture);
+	//foreGround = InitParallax(imageTexture);
 	playerTexture = LoadTexture("res/playerShip2_orange.png");
 	bird = CreateBird(playerTexture);
 	obstacle = CreateObstacle();
@@ -57,7 +57,7 @@ void MainLoop()
 {
 	while (!exitWindow)
 	{
-		while (!WindowShouldClose() && !salir)
+		while (!WindowShouldClose() && !isGameRunning)
 		{
 			ScenesSwitch();
 			exitWindow = true;
@@ -95,7 +95,7 @@ void Draw()
 		}
 		else
 		{
-			DrawParallax(foreGround);
+			//DrawParallax(foreGround);
 			DrawRectangleRec(GetBirdRect(bird), BLACK);
 			DrawRectangleRec(GetRecObstacle(obstacle), GREEN);
 			DrawBird(bird);

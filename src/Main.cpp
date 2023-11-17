@@ -1,8 +1,8 @@
 #include "Game.h"
+
 using namespace game;
 
-int main()
+int main(void)
 {
 	RunGame();
-	return 0;
 }

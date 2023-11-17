@@ -4,45 +4,54 @@
     <Filter Include="Source">
       <UniqueIdentifier>{11a14584-d5b8-436f-b4b1-397b8156714a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Elements">
+      <UniqueIdentifier>{8c963613-242e-4757-8e4e-1e3936617465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\GameData">
+      <UniqueIdentifier>{225bcf8c-f10f-4747-931b-7b426e614f0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\ScreenManager">
+      <UniqueIdentifier>{d780c327-3daf-437b-94d7-cfc063759963}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="src\Game.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="src\Bird.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Elements</Filter>
     </ClCompile>
     <ClCompile Include="src\Obstacle.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Menu.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Elements</Filter>
     </ClCompile>
     <ClCompile Include="src\Parallax.cpp">
-      <Filter>Source</Filter>
+      <Filter>Source\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Game.cpp">
+      <Filter>Source\GameData</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Menu.cpp">
+      <Filter>Source\ScreenManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Game.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="src\WindowSize.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="src\Bird.h">
-      <Filter>Source</Filter>
+      <Filter>Source\Elements</Filter>
     </ClInclude>
     <ClInclude Include="src\Obstacle.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Menu.h">
-      <Filter>Source</Filter>
+      <Filter>Source\Elements</Filter>
     </ClInclude>
     <ClInclude Include="src\Parallax.h">
-      <Filter>Source</Filter>
+      <Filter>Source\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Game.h">
+      <Filter>Source\GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Menu.h">
+      <Filter>Source\ScreenManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowSize.h">
+      <Filter>Source\Elements</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

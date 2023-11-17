@@ -10,7 +10,7 @@ MenuScenes menu;
 Buttons Texto[4];
 Buttons back, pause, restart, resume;
 
-extern bool salir;
+extern bool isGameRunning;
 static int fontSize = 40;
 static int verticalSpacing = 120;
 
@@ -143,7 +143,6 @@ void CheckInstructions()
 
 void DrawCredits()
 {
-
 	DrawRectangleGradientV(static_cast<int>(Texto[2].backgroundBttn.x), static_cast<int>(Texto[2].backgroundBttn.y), static_cast<int>(Texto[2].backgroundBttn.width), static_cast<int>(Texto[2].backgroundBttn.height), BLACK, Fade(DARKPURPLE, 0.5f));
 	DrawText(Texto[2].text.c_str(), static_cast<int>(Texto[2].pos.x), static_cast<int>(Texto[2].pos.y), static_cast<int>(Texto[2].fontSize), BLUE);
 
@@ -259,7 +258,7 @@ void ScenesSwitch()
 
 	case MenuScenes::Quit:
 
-		salir = true;
+		isGameRunning = true;
 		break;
 	}
 }

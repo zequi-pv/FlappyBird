@@ -29,7 +29,7 @@ void DrawBird(Bird bird)
 void MoveBird(Bird& bird)
 {
    /* cout << "y: " << bird.pos.y << endl;*/
-    if (bird.pos.y<0)
+    if (bird.pos.y < 0)
     {
         bird.pos.y = 0;
     }
