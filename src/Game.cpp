@@ -18,9 +18,10 @@ void DrawPause();
 Texture2D playerTexture;
 Bird bird;
 Obstacle obstacle;
-Parallax foreGround[2];
+Texture2D imageTexture;
+Parallax foreGround;
 //Parallax midGround[2];
-Parallax backGround[2];
+//Parallax backGround;
 
 static bool exitWindow = false;
 static bool pause = false;
@@ -42,9 +43,11 @@ static void Init()
 	InitWindow(static_cast<int>(SCREEN_WIDTH), static_cast<int>(SCREEN_HEIGTH), "ASTEROIDS");
 	SetExitKey(KEY_NULL);
 	InitializeTexts();
-	Texture2D backGround = LoadTexture("res/Background/sCitySky.png");
+	
+	 //backGround = LoadTexture("res/Background/sCitySky.png");
 	//Texture2D midGround = LoadTexture("res/Background/sCityMid.png");
-	Texture2D foreGround = LoadTexture("res/Background/sCityClose.png");
+	imageTexture= LoadTexture("res/Background/sCityClose.png");
+	foreGround = InitParallax(imageTexture);
 	playerTexture = LoadTexture("res/playerShip2_orange.png");
 	bird = CreateBird(playerTexture);
 	obstacle = CreateObstacle();
@@ -72,8 +75,8 @@ void Update()
 void Close()
 {
 	UnloadTexture(playerTexture);
-	UnloadTexture(foreGround);
-	UnloadTexture(backGround);
+	UnloadTexture(imageTexture);
+	///UnloadTexture(backGround);
 	/*UnloadTexture(playerTexture);*/
 	CloseWindow();
 }
@@ -92,6 +95,7 @@ void Draw()
 		}
 		else
 		{
+			DrawParallax(foreGround);
 			DrawRectangleRec(GetBirdRect(bird), BLACK);
 			DrawRectangleRec(GetRecObstacle(obstacle), GREEN);
 			DrawBird(bird);
@@ -175,7 +179,7 @@ void BirdCollition(Bird& player, Obstacle& obs)
 
 	if (timeSinceLastCollision > collisionInterval)
 	{
-		if (!obs.hit && CheckCollisionRecs(GetBirdRect(player), GetRecObstacle(obs))||player.pos.y>GetScreenHeight())
+		if (!obs.hit && CheckCollisionRecs(GetBirdRect(player), GetRecObstacle(obstacle))||player.pos.y>GetScreenHeight())
 		{
 			obs.hit = true;
 			player.vidas -= 1;

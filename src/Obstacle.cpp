@@ -14,6 +14,69 @@ void InitRandom()
     }
 }
 
+//ObstaclePair CreateObstaclePair()
+//{
+//    ObstaclePair pair;
+//
+//    float randomTopHeight = static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * 200.0f + 50.0f;
+//    float randomBottomHeight = static_cast<float>(GetScreenHeight()) - randomTopHeight - 200.0f;
+//
+//    pair.top.size = { 50,randomTopHeight }; // Altura del obstáculo superior
+//    pair.bottom.size = { 50, randomBottomHeight }; // Altura del obstáculo inferior
+//
+//    pair.top.speed = 500;
+//    pair.bottom.speed = 500;
+//
+//    pair.top.color = BLUE;
+//    pair.bottom.color = BLUE;
+//    
+//    pair.top.hit = false;
+//    pair.bottom.hit = false;
+//
+//    // Posiciones de los obstáculos
+//    pair.top.pos = { static_cast<float>(GetScreenWidth()), 0 };
+//    pair.bottom.pos = { static_cast<float>(GetScreenWidth()), pair.top.size.y + 200 }; // Espacio de 200 entre los obstáculos
+//
+//    return pair;
+//}
+//void MoveObstaclePair(ObstaclePair& pair)
+//{
+//    pair.top.pos.x -= pair.top.speed * GetFrameTime();
+//    pair.bottom.pos.x -= pair.bottom.speed * GetFrameTime();
+//
+//    if (pair.top.pos.x + pair.top.size.x < 0)
+//    {
+//        pair.top.pos.x = static_cast<float>(GetScreenWidth());
+//        float randomTopHeight = static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * 200.0f + 50.0f;
+//        float randomBottomHeight = static_cast<float>(GetScreenHeight()) - randomTopHeight - 200.0f;
+//        pair.top.size = { 50.0f, randomTopHeight };
+//        pair.bottom.size = { 50.0f, randomBottomHeight };
+//        pair.top.pos.y = 0;
+//        pair.bottom.pos.y = randomTopHeight + 200.0f;
+//    }
+//}
+//
+//void DrawObstaclePair(ObstaclePair& pair)
+//{
+//    DrawRectangle(static_cast<int>(pair.top.pos.x), static_cast<int>(pair.top.pos.y), static_cast<int>(pair.top.size.x), static_cast<int>(pair.top.size.y), pair.top.color);
+//    DrawRectangle(static_cast<int>(pair.bottom.pos.x), static_cast<int>(pair.bottom.pos.y), static_cast<int>(pair.bottom.size.x), static_cast<int>(pair.bottom.size.y), pair.bottom.color);
+//}
+//
+//void UpdateObstaclePair(ObstaclePair& pair)
+//{
+//    MoveObstaclePair(pair);
+//}
+//
+//Rectangle GetRecObstacle(ObstaclePair& pair)
+//{
+//    return Rectangle{ pair.top.pos.x, pair.top.pos.y, pair.top.size.x, pair.top.size.y };
+//}
+//
+//void ResetObject(ObstaclePair& pair)
+//{
+//    pair.top.pos = { static_cast<float>(GetScreenWidth()), 0 };
+//    pair.bottom.pos = { static_cast<float>(GetScreenWidth()), pair.top.size.y + 200.0f }; // Espacio de 200 entre los obstáculos
+//}
 Obstacle CreateObstacle()
 {
     Obstacle obstacle;
