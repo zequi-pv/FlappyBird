@@ -96,8 +96,11 @@ void InitializeTexts()
 	back.backgroundBttn.y = backTextY - 3;
 	back.backgroundBttn.width = backTextWidth + 20;
 	back.backgroundBttn.height = 50;*/
+}
 
-
+void DrawVersion()
+{
+	DrawText(TextFormat("Version 0.3"), GetScreenWidth() / 2 - 500, GetScreenHeight() / 2 + 350, 25, BLACK);
 }
 
 void DrawSinglePlayer()
@@ -243,6 +246,7 @@ void DrawButtons()
 		DrawInstruction();
 		DrawCredits();
 		DrawQuit();
+		DrawVersion();
 	}
 
 	EndDrawing();

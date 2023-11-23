@@ -10,10 +10,13 @@ struct Obstacle
 };
 
 void InitRandom();
-Obstacle CreateObstacle();
+Obstacle CreateObstacle(float posX);
+Obstacle CreateObstacle2(float posX);
 void MoveObstacle(Obstacle& obstacle);
+void MoveObstacle2(Obstacle& obstacle);
 void DrawObstacle(Obstacle& obstacle);
 void UpdateObstacle(Obstacle& obstacle);
+void UpdateObstacle2(Obstacle& obstacle);
 Rectangle GetRecObstacle(Obstacle& obstacle);
 void ResetObject(Obstacle obstacle);
 

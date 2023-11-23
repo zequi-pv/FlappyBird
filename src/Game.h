@@ -3,8 +3,9 @@
 #include"raylib.h"
 
 void Update();
+void UpdateMultiPlayer();
 void Draw();
-void DrawCredit();
+void DrawMultiPlayerGame();
 void GameLoop();
 void GameLoopMultiPlayer();
 void WindowInstructions();

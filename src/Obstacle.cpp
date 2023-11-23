@@ -77,14 +77,26 @@ void InitRandom()
 //    pair.top.pos = { static_cast<float>(GetScreenWidth()), 0 };
 //    pair.bottom.pos = { static_cast<float>(GetScreenWidth()), pair.top.size.y + 200.0f }; // Espacio de 200 entre los obstáculos
 //}
-Obstacle CreateObstacle()
+Obstacle CreateObstacle(float posX)
 {
     Obstacle obstacle;
-    obstacle.size = { 50, 210 };
-    obstacle.speed = 500;
+    obstacle.size = { 150.0f, 400.0f };
+    obstacle.speed = 150.0f;
     obstacle.color = BLUE;
     obstacle.hit = false;
-    obstacle.pos = { static_cast<float>(GetScreenWidth()), static_cast<float>(rand() % GetScreenHeight()) };
+    obstacle.pos = { posX, 0.0f };
+
+    return obstacle;
+}
+
+Obstacle CreateObstacle2(float posX)
+{
+    Obstacle obstacle;
+    obstacle.size = { 150.0f, 400.0f };
+    obstacle.speed = 150.0f;
+    obstacle.color = BLUE;
+    obstacle.hit = false;
+    obstacle.pos = { posX, static_cast<float>(GetScreenHeight() - 100) };
 
     return obstacle;
 }
@@ -96,7 +108,18 @@ void MoveObstacle(Obstacle& obstacle)
     if (obstacle.pos.x + obstacle.size.x < 0)
     {
         obstacle.pos.x = static_cast<float>(GetScreenWidth());
-        obstacle.pos.y = static_cast<float>(rand() % GetScreenHeight());
+        obstacle.pos.y = static_cast<float>(obstacle.pos.y);
+    }
+}
+
+void MoveObstacle2(Obstacle& obstacle)
+{
+    obstacle.pos.x -= obstacle.speed * GetFrameTime();
+
+    if (obstacle.pos.x + obstacle.size.x < 0)
+    {
+        obstacle.pos.x = static_cast<float>(GetScreenWidth());
+        obstacle.pos.y = static_cast<float>(GetScreenHeight() - 100);
     }
 }
 
@@ -110,6 +133,11 @@ void UpdateObstacle(Obstacle& obstacle)
 	MoveObstacle(obstacle);
 }
 
+void UpdateObstacle2(Obstacle& obstacle)
+{
+    MoveObstacle2(obstacle);
+}
+
 Rectangle GetRecObstacle(Obstacle& obstacle)
 {
 	return Rectangle{ obstacle.pos.x , obstacle.pos.y , obstacle.size.x, obstacle.size.y };
@@ -118,5 +146,5 @@ Rectangle GetRecObstacle(Obstacle& obstacle)
 void ResetObject(Obstacle obstacle)
 {
     InitRandom();
-    obstacle.pos = { static_cast<float>(GetScreenWidth()), static_cast<float>(rand() % GetScreenHeight()) };
+    obstacle.pos = { static_cast<float>(obstacle.pos.x), static_cast<float>(obstacle.pos.y) };
 }

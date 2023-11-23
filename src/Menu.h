@@ -39,5 +39,6 @@ void DrawInstruction();
 void DrawCredits();
 void CheckBack();
 void DrawBack();
+void DrawVersion();
 
 void DrawQuit();
