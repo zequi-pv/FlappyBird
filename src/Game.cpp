@@ -1,10 +1,10 @@
 #include<iostream>
-#include"Game.h"
-#include"WindowSize.h"
-#include"Bird.h"
-#include"Obstacle.h"
-#include"Menu.h"
-#include"Parallax.h"
+#include "Game.h"
+//#include "WindowSize.h"
+#include "Bird.h"
+#include "Obstacle.h"
+#include "Menu.h"
+#include "Parallax.h"
 
 using namespace std;
 
@@ -19,7 +19,7 @@ Texture2D playerTexture;
 Bird bird;
 Obstacle obstacle;
 Texture2D imageTexture;
-Parallax foreGround;
+//Parallax foreGround;
 //Parallax midGround[2];
 //Parallax backGround;
 
@@ -40,7 +40,10 @@ namespace game
 
 static void Init()
 {
-	InitWindow(static_cast<int>(SCREEN_WIDTH), static_cast<int>(SCREEN_HEIGTH), "ASTEROIDS");
+	const int screenWidth = 1024;
+	const int screenHeight = 768;
+
+	InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), "ASTEROIDS");
 	SetExitKey(KEY_NULL);
 	InitializeTexts();
 	
@@ -112,7 +115,7 @@ void DrawCredit()
 
 void GameLoop()
 {
-	cout << "endmatch " << endmatch<<endl;
+	//cout << "endmatch " << endmatch<<endl;
 	if (!endmatch)
 	{
 		if (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_P))
@@ -146,6 +149,67 @@ void GameLoop()
 		}
 		
 	}else
+	{
+		DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, 1024, 768, BLACK, Fade(RED, 1.0f));
+		DrawText(TextFormat("You Lose"), 50, 200, 55, WHITE);
+		DrawText(TextFormat("Press R to play again or Esc to Exit"), 50, 250, 35, WHITE);
+
+		if (IsKeyPressed(KEY_R))
+		{
+			bird = CreateBird(playerTexture);
+			obstacle = CreateObstacle();
+			pause = false;
+			endmatch = false;
+		}
+		else if (IsKeyPressed(KEY_ESCAPE))
+		{
+			menu = MenuScenes::MainMenu;
+			bird = CreateBird(playerTexture);
+			obstacle = CreateObstacle();
+			pause = false;
+			endmatch = false;
+		}
+	}
+	Draw();
+}
+
+void GameLoopMultiPlayer()
+{
+	//cout << "endmatch " << endmatch<<endl;
+	if (!endmatch)
+	{
+		if (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_P))
+		{
+			pause = !pause;
+			/*cout << "pause" << endl;
+			cout << pause << endl;*/
+
+		}
+		if (!pause)
+		{
+			Update();
+		}
+		else
+		{
+			DrawPause();
+
+			if (IsKeyPressed(KEY_R))
+			{
+				bird = CreateBird(playerTexture);
+				obstacle = CreateObstacle();
+				pause = false;
+			}
+			else if (IsKeyPressed(KEY_E))
+			{
+				menu = MenuScenes::MainMenu;
+				bird = CreateBird(playerTexture);
+				obstacle = CreateObstacle();
+				pause = false;
+			}
+		}
+
+	}
+	else
 	{
 		DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, 1024, 768, BLACK, Fade(RED, 1.0f));
 		DrawText(TextFormat("You Lose"), 50, 200, 55, WHITE);

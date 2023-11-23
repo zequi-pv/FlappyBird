@@ -6,6 +6,7 @@ void Update();
 void Draw();
 void DrawCredit();
 void GameLoop();
+void GameLoopMultiPlayer();
 void WindowInstructions();
 void UpdateMenu();
 void CreditsWindow();

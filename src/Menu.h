@@ -7,7 +7,8 @@ using namespace std;
 enum class MenuScenes
 {
 	MainMenu,
-	Play,
+	SinglePlay,
+	MultiPlay,
 	Instructions,
 	Credits,
 	Quit
@@ -22,16 +23,18 @@ struct Buttons
 
 	Rectangle backgroundBttn{};
 };
-extern Buttons Texto[4];
+extern Buttons Texto[5];
 
 void InitializeTexts();
 void CheckSinglePlayer();
+void CheckMultiPlayer();
 void CheckInstructions();
 void CheckCredits();
 void CheckQuit();
 void ScenesSwitch();
 void DrawButtons();
 void DrawSinglePlayer();
+void DrawMultiPlayer();
 void DrawInstruction();
 void DrawCredits();
 void CheckBack();

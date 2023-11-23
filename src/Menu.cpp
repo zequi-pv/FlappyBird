@@ -2,12 +2,12 @@
 #include"raylib.h"
 #include"Menu.h"
 #include"Game.h"
-#include"WindowSize.h"
+//#include"WindowSize.h"
 
 using namespace std;
 
 MenuScenes menu;
-Buttons Texto[4];
+Buttons Texto[5];
 Buttons back, pause, restart, resume;
 
 extern bool isGameRunning;
@@ -17,16 +17,17 @@ static int verticalSpacing = 120;
 
 void InitializeTexts()
 {
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 5; i++) {
 
 		string buttonText;
-		if (i == 0) buttonText = "PLAY";
-		else if (i == 1) buttonText = "RULES";
-		else if (i == 2) buttonText = "CREDITS";
-		else if (i == 3) buttonText = "QUIT";
+		if (i == 0) buttonText = "SINGLEPLAYER";
+		else if (i == 1) buttonText = "MULTIPLAYER";
+		else if (i == 2) buttonText = "RULES";
+		else if (i == 3) buttonText = "CREDITS";
+		else if (i == 4) buttonText = "QUIT";
 
 		float textWidth = static_cast<float>(MeasureText(buttonText.c_str(), fontSize));
-		float textX = static_cast<float>(SCREEN_WIDTH / 2) - textWidth / 2;
+		float textX = static_cast<float>(GetScreenWidth() / 2) - textWidth / 2;
 		float textY = static_cast<float>(i * verticalSpacing + 50);
 
 
@@ -43,7 +44,7 @@ void InitializeTexts()
 	back.text = "BACK";
 
 	float backTextWidth = static_cast<float>(MeasureText(back.text.c_str(), fontSize));
-	float backTextX = static_cast<float>(SCREEN_WIDTH / 2) - backTextWidth / 2;
+	float backTextX = static_cast<float>(GetScreenWidth() / 2) - backTextWidth / 2;
 	float backTextY = static_cast<float>(4 * verticalSpacing + 50);
 
 	back.fontSize = fontSize;
@@ -115,11 +116,11 @@ void CheckSinglePlayer()
 {
 	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), Texto[0].backgroundBttn))
 	{
-		menu = MenuScenes::Play;
+		menu = MenuScenes::SinglePlay;
 	}
 }
 
-void DrawInstruction()
+void DrawMultiPlayer()
 {
 	DrawRectangle(static_cast<int>(Texto[1].backgroundBttn.x), static_cast<int>(Texto[1].backgroundBttn.y), static_cast<int>(Texto[1].backgroundBttn.width), static_cast<int>(Texto[1].backgroundBttn.height), WHITE);
 	DrawRectangleGradientV(static_cast<int>(Texto[1].backgroundBttn.x), static_cast<int>(Texto[1].backgroundBttn.y), static_cast<int>(Texto[1].backgroundBttn.width), static_cast<int>(Texto[1].backgroundBttn.height), BLACK, Fade(DARKPURPLE, 0.5f));
@@ -127,15 +128,37 @@ void DrawInstruction()
 
 	if (CheckCollisionPointRec(GetMousePosition(), Texto[1].backgroundBttn))
 	{
-		DrawRectangleLines(static_cast<int>(Texto[1].backgroundBttn.x - 1), static_cast<int>(Texto[1].backgroundBttn.y - 1), static_cast<int>(Texto[1].backgroundBttn.width + 2), static_cast<int>(Texto[1].backgroundBttn.height + 2), RED);
+		DrawRectangleLines(static_cast<int>(Texto[1].backgroundBttn.x), static_cast<int>(Texto[1].backgroundBttn.y), static_cast<int>(Texto[1].backgroundBttn.width), static_cast<int>(Texto[1].backgroundBttn.height + 2), RED);
 		DrawRectangle(static_cast<int>(Texto[1].backgroundBttn.x), static_cast<int>(Texto[1].backgroundBttn.y), static_cast<int>(Texto[1].backgroundBttn.width), static_cast<int>(Texto[1].backgroundBttn.height), BLACK);
 		DrawText(Texto[1].text.c_str(), static_cast<int> (Texto[1].pos.x), static_cast<int>(Texto[1].pos.y), static_cast<int> (Texto[1].fontSize), RED);
 	}
 }
 
-void CheckInstructions()
+void CheckMultiPlayer() 
 {
 	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), Texto[1].backgroundBttn))
+	{
+		menu = MenuScenes::MultiPlay;
+	}
+}
+
+void DrawInstruction()
+{
+	DrawRectangle(static_cast<int>(Texto[2].backgroundBttn.x), static_cast<int>(Texto[2].backgroundBttn.y), static_cast<int>(Texto[2].backgroundBttn.width), static_cast<int>(Texto[2].backgroundBttn.height), WHITE);
+	DrawRectangleGradientV(static_cast<int>(Texto[2].backgroundBttn.x), static_cast<int>(Texto[2].backgroundBttn.y), static_cast<int>(Texto[2].backgroundBttn.width), static_cast<int>(Texto[2].backgroundBttn.height), BLACK, Fade(DARKPURPLE, 0.5f));
+	DrawText(Texto[2].text.c_str(), static_cast<int> (Texto[2].pos.x), static_cast<int>(Texto[2].pos.y), static_cast<int> (Texto[2].fontSize), DARKBLUE);
+
+	if (CheckCollisionPointRec(GetMousePosition(), Texto[2].backgroundBttn))
+	{
+		DrawRectangleLines(static_cast<int>(Texto[2].backgroundBttn.x - 1), static_cast<int>(Texto[2].backgroundBttn.y - 1), static_cast<int>(Texto[2].backgroundBttn.width + 2), static_cast<int>(Texto[2].backgroundBttn.height + 2), RED);
+		DrawRectangle(static_cast<int>(Texto[2].backgroundBttn.x), static_cast<int>(Texto[2].backgroundBttn.y), static_cast<int>(Texto[2].backgroundBttn.width), static_cast<int>(Texto[2].backgroundBttn.height), BLACK);
+		DrawText(Texto[2].text.c_str(), static_cast<int> (Texto[2].pos.x), static_cast<int>(Texto[2].pos.y), static_cast<int> (Texto[2].fontSize), RED);
+	}
+}
+
+void CheckInstructions()
+{
+	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), Texto[2].backgroundBttn))
 	{
 		menu = MenuScenes::Instructions;
 	}
@@ -143,28 +166,8 @@ void CheckInstructions()
 
 void DrawCredits()
 {
-	DrawRectangleGradientV(static_cast<int>(Texto[2].backgroundBttn.x), static_cast<int>(Texto[2].backgroundBttn.y), static_cast<int>(Texto[2].backgroundBttn.width), static_cast<int>(Texto[2].backgroundBttn.height), BLACK, Fade(DARKPURPLE, 0.5f));
-	DrawText(Texto[2].text.c_str(), static_cast<int>(Texto[2].pos.x), static_cast<int>(Texto[2].pos.y), static_cast<int>(Texto[2].fontSize), BLUE);
-
-	if (CheckCollisionPointRec(GetMousePosition(), Texto[2].backgroundBttn))
-	{
-		DrawRectangle(static_cast<int>(Texto[2].backgroundBttn.x), static_cast<int>(Texto[2].backgroundBttn.y), static_cast<int>(Texto[2].backgroundBttn.width), static_cast<int>(Texto[2].backgroundBttn.height), BLACK);
-		DrawText(Texto[2].text.c_str(), static_cast<int>(Texto[2].pos.x), static_cast<int>(Texto[2].pos.y), static_cast<int>(Texto[2].fontSize), RED);
-	}
-}
-
-void CheckCredits()
-{
-	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), Texto[2].backgroundBttn))
-	{
-		menu = MenuScenes::Credits;
-	}
-}
-
-void DrawQuit()
-{
 	DrawRectangleGradientV(static_cast<int>(Texto[3].backgroundBttn.x), static_cast<int>(Texto[3].backgroundBttn.y), static_cast<int>(Texto[3].backgroundBttn.width), static_cast<int>(Texto[3].backgroundBttn.height), BLACK, Fade(DARKPURPLE, 0.5f));
-	DrawText(Texto[3].text.c_str(), static_cast<int>(Texto[3].pos.x), static_cast<int>(Texto[3].pos.y), static_cast<int>(Texto[3].fontSize), RED);
+	DrawText(Texto[3].text.c_str(), static_cast<int>(Texto[3].pos.x), static_cast<int>(Texto[3].pos.y), static_cast<int>(Texto[3].fontSize), BLUE);
 
 	if (CheckCollisionPointRec(GetMousePosition(), Texto[3].backgroundBttn))
 	{
@@ -173,9 +176,29 @@ void DrawQuit()
 	}
 }
 
-void CheckQuit()
+void CheckCredits()
 {
 	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), Texto[3].backgroundBttn))
+	{
+		menu = MenuScenes::Credits;
+	}
+}
+
+void DrawQuit()
+{
+	DrawRectangleGradientV(static_cast<int>(Texto[4].backgroundBttn.x), static_cast<int>(Texto[4].backgroundBttn.y), static_cast<int>(Texto[4].backgroundBttn.width), static_cast<int>(Texto[4].backgroundBttn.height), BLACK, Fade(DARKPURPLE, 0.5f));
+	DrawText(Texto[4].text.c_str(), static_cast<int>(Texto[4].pos.x), static_cast<int>(Texto[4].pos.y), static_cast<int>(Texto[4].fontSize), RED);
+
+	if (CheckCollisionPointRec(GetMousePosition(), Texto[4].backgroundBttn))
+	{
+		DrawRectangle(static_cast<int>(Texto[4].backgroundBttn.x), static_cast<int>(Texto[4].backgroundBttn.y), static_cast<int>(Texto[4].backgroundBttn.width), static_cast<int>(Texto[4].backgroundBttn.height), BLACK);
+		DrawText(Texto[4].text.c_str(), static_cast<int>(Texto[4].pos.x), static_cast<int>(Texto[4].pos.y), static_cast<int>(Texto[4].fontSize), RED);
+	}
+}
+
+void CheckQuit()
+{
+	if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), Texto[4].backgroundBttn))
 	{
 		menu = MenuScenes::Quit;
 	}
@@ -207,7 +230,7 @@ void CheckBack()
 void DrawButtons()
 {
 	BeginDrawing();
-	DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, static_cast <int>(SCREEN_WIDTH), static_cast <int>(SCREEN_HEIGTH), BLACK, Fade(RED, 1.0f));
+	DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, static_cast <int>(GetScreenWidth()), static_cast <int>(GetScreenHeight()), BLACK, Fade(RED, 1.0f));
 
 	if (menu == MenuScenes::Instructions || menu == MenuScenes::Credits)
 	{
@@ -216,6 +239,7 @@ void DrawButtons()
 	else if (menu == MenuScenes::MainMenu)
 	{
 		DrawSinglePlayer();
+		DrawMultiPlayer();
 		DrawInstruction();
 		DrawCredits();
 		DrawQuit();
@@ -235,24 +259,26 @@ void ScenesSwitch()
 
 		break;
 
-	case MenuScenes::Play:
+	case MenuScenes::SinglePlay:
 
 		GameLoop();
 
 		break;
 
+	case MenuScenes::MultiPlay:
+
+		GameLoopMultiPlayer();
+
+		break;
 	case MenuScenes::Instructions:
 
-
 		WindowInstructions();
-
 
 		break;
 
 	case MenuScenes::Credits:
 
 		CreditsWindow();
-
 
 		break;
 
