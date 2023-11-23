@@ -195,12 +195,9 @@ void GameLoop()
 	//cout << "endmatch " << endmatch<<endl;
 	if (!endmatch)
 	{
-		if (IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_P))
+		if (IsKeyPressed(KEY_ESCAPE))
 		{
-			pause = !pause;
-			cout << "pause" << endl;
-			cout << pause << endl;
-			
+			pause = true;
 		}
 		if (!pause)
 		{
@@ -215,10 +212,10 @@ void GameLoop()
 				bird = CreateBird(playerTexture);
 				obstacle = CreateObstacle(static_cast<float>(GetScreenWidth() - 100));
 				obstacle2 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 100));
-				obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 300));
-				obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 300));;
-				obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 500));;
-				obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 500));;
+				obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 800));
+				obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 800));;
+				obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 1500));;
+				obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 1500));;
 				pause = false;
 			}
 			else if (IsKeyPressed(KEY_E))
@@ -227,10 +224,10 @@ void GameLoop()
 				bird = CreateBird(playerTexture);
 				obstacle = CreateObstacle(static_cast<float>(GetScreenWidth() - 100));
 				obstacle2 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 100));
-				obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 300));
-				obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 300));;
-				obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 500));;
-				obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 500));;
+				obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 800));
+				obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 800));;
+				obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 1500));;
+				obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 1500));;
 				pause = false;
 			}
 		}
@@ -246,10 +243,10 @@ void GameLoop()
 			bird = CreateBird(playerTexture);
 			obstacle = CreateObstacle(static_cast<float>(GetScreenWidth() - 100));
 			obstacle2 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 100));
-			obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 300));
-			obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 300));;
-			obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 500));;
-			obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 500));;
+			obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 800));
+			obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 800));;
+			obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 1500));;
+			obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 1500));;
 			pause = false;
 			endmatch = false;
 		}
@@ -259,10 +256,10 @@ void GameLoop()
 			bird = CreateBird(playerTexture);
 			obstacle = CreateObstacle(static_cast<float>(GetScreenWidth() - 100));
 			obstacle2 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 100));
-			obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 300));
-			obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 300));;
-			obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 500));;
-			obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 500));;
+			obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 800));
+			obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 800));;
+			obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 1500));;
+			obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 1500));;
 			pause = false;
 			endmatch = false;
 		}
@@ -296,10 +293,10 @@ void GameLoopMultiPlayer()
 				bird2 = CreateBird(playerTexture);
 				obstacle = CreateObstacle(static_cast<float>(GetScreenWidth() - 100));
 				obstacle2 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 100));
-				obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 300));
-				obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 300));;
-				obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 500));;
-				obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 500));;
+				obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 800));
+				obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 800));;
+				obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 1500));;
+				obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 1500));;
 				pause = false;
 			}
 			else if (IsKeyPressed(KEY_E))
@@ -309,10 +306,10 @@ void GameLoopMultiPlayer()
 				bird2 = CreateBird(playerTexture);
 				obstacle = CreateObstacle(static_cast<float>(GetScreenWidth() - 100));
 				obstacle2 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 100));
-				obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 300));
-				obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 300));;
-				obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 500));;
-				obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 500));;
+				obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 800));
+				obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 800));;
+				obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 1500));;
+				obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 1500));;
 				pause = false;
 			}
 		}
@@ -330,10 +327,10 @@ void GameLoopMultiPlayer()
 			bird2 = CreateBird(playerTexture);
 			obstacle = CreateObstacle(static_cast<float>(GetScreenWidth() - 100));
 			obstacle2 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 100));
-			obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 300));
-			obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 300));;
-			obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 500));;
-			obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 500));;
+			obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 800));
+			obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 800));;
+			obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 1500));;
+			obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 1500));;
 			pause = false;
 			endmatch = false;
 		}
@@ -344,10 +341,10 @@ void GameLoopMultiPlayer()
 			bird2 = CreateBird(playerTexture);
 			obstacle = CreateObstacle(static_cast<float>(GetScreenWidth() - 100));
 			obstacle2 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 100));
-			obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 300));
-			obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 300));;
-			obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 500));;
-			obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 500));;
+			obstacle3 = CreateObstacle(static_cast<float>(GetScreenWidth() - 800));
+			obstacle4 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 800));;
+			obstacle5 = CreateObstacle(static_cast<float>(GetScreenWidth() - 1500));;
+			obstacle6 = CreateObstacle2(static_cast<float>(GetScreenWidth() - 1500));;
 			pause = false;
 			endmatch = false;
 		}
