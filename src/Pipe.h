@@ -1,12 +1,14 @@
 #pragma once
 #include "raylib.h"
 
-struct Pipe
+namespace game
 {
-	Vector2 size;
-	Vector2 pos;
-	Color color;
-};
+	struct Pipe
+	{
+		Vector2 size;
+		Vector2 pos;
+		Color color;
+	};
 
-Pipe initPipeUp();
-Pipe initPipeDown();
+	Pipe initPipe();
+}

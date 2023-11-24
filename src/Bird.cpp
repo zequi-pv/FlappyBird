@@ -5,88 +5,91 @@
 
 using namespace std;
 
-Bird CreateBird(Texture2D birdTexture)
+namespace game
 {
-	Bird bird;
-	bird.pos = { static_cast<float>(GetScreenWidth() / 2)-500, static_cast<float> (GetScreenHeight() / 2) };
-	bird.size = { 50,50 };
-	bird.vidas = 3;
-	bird.speed = 0.0f;
-    bird.aceleration = 0.0f;
-    bird.gravity = 400.0f;
-	bird.color = RED;
-	bird.texture = birdTexture;
-	
-	return bird;
-}
-
-void DrawBird(Bird bird)
-{
-	DrawRectangle(static_cast<int>(bird.pos.x), static_cast<int>(bird.pos.y), static_cast<int>(bird.size.x), static_cast<int>(bird.size.y), bird.color);
-	DrawTexture(bird.texture, static_cast<int>(bird.pos.x), static_cast<int>(bird.pos.y), bird.color);
-}
-
-void MoveBird(Bird& bird)
-{
-    if (bird.pos.y < 0)
+    Bird CreateBird(Texture2D birdTexture)
     {
-        bird.pos.y = 0;
-    }
-    if (IsKeyPressed(KEY_W))
-    {
+        Bird bird;
+        bird.pos = { static_cast<float>(GetScreenWidth() / 2) - 500, static_cast<float> (GetScreenHeight() / 2) };
+        bird.size = { 50,50 };
+        bird.vidas = 3;
+        bird.speed = 0.0f;
         bird.aceleration = 0.0f;
-        bird.speed = bird.gravity / 2;
+        bird.gravity = 400.0f;
+        bird.color = RED;
+        bird.texture = birdTexture;
 
+        return bird;
     }
-    else
+
+    void DrawBird(Bird bird)
     {
-        if (bird.aceleration >= bird.gravity)
+        DrawRectangle(static_cast<int>(bird.pos.x), static_cast<int>(bird.pos.y), static_cast<int>(bird.size.x), static_cast<int>(bird.size.y), bird.color);
+        DrawTexture(bird.texture, static_cast<int>(bird.pos.x), static_cast<int>(bird.pos.y), bird.color);
+    }
+
+    void MoveBird(Bird& bird)
+    {
+        if (bird.pos.y < 0)
         {
-            bird.aceleration = bird.gravity;
+            bird.pos.y = 0;
         }
-
-        bird.aceleration += bird.gravity * GetFrameTime();
-        bird.speed -= bird.aceleration * GetFrameTime();
-        bird.pos.y -= bird.speed * GetFrameTime();
-    }
-}
-
-void MoveBird2(Bird& bird)
-{
-    if (bird.pos.y < 0)
-    {
-        bird.pos.y = 0;
-    }
-    if (IsKeyPressed(KEY_UP))
-    {
-        bird.aceleration = 0.0f;
-        bird.speed = bird.gravity / 2;
-
-    }
-    else
-    {
-        if (bird.aceleration >= bird.gravity)
+        if (IsKeyPressed(KEY_W))
         {
-            bird.aceleration = bird.gravity;
+            bird.aceleration = 0.0f;
+            bird.speed = bird.gravity / 2;
+
         }
+        else
+        {
+            if (bird.aceleration >= bird.gravity)
+            {
+                bird.aceleration = bird.gravity;
+            }
 
-        bird.aceleration += bird.gravity * GetFrameTime();
-        bird.speed -= bird.aceleration * GetFrameTime();
-        bird.pos.y -= bird.speed * GetFrameTime();
+            bird.aceleration += bird.gravity * GetFrameTime();
+            bird.speed -= bird.aceleration * GetFrameTime();
+            bird.pos.y -= bird.speed * GetFrameTime();
+        }
     }
-}
 
-void UpdateBird(Bird& bird)
-{
+    void MoveBird2(Bird& bird)
+    {
+        if (bird.pos.y < 0)
+        {
+            bird.pos.y = 0;
+        }
+        if (IsKeyPressed(KEY_UP))
+        {
+            bird.aceleration = 0.0f;
+            bird.speed = bird.gravity / 2;
+
+        }
+        else
+        {
+            if (bird.aceleration >= bird.gravity)
+            {
+                bird.aceleration = bird.gravity;
+            }
+
+            bird.aceleration += bird.gravity * GetFrameTime();
+            bird.speed -= bird.aceleration * GetFrameTime();
+            bird.pos.y -= bird.speed * GetFrameTime();
+        }
+    }
+
+    void UpdateBird(Bird& bird)
+    {
         MoveBird(bird);
-}
+    }
 
-void UpdateBird2(Bird& bird)
-{
-    MoveBird2(bird);
-}
+    void UpdateBird2(Bird& bird)
+    {
+        MoveBird2(bird);
+    }
 
-Rectangle GetBirdRect(Bird bird)
-{
-	return Rectangle{bird.pos.x ,bird.pos.y , bird.size.x,bird.size.y };
+    Rectangle GetBirdRect(Bird bird)
+    {
+        return Rectangle{ bird.pos.x ,bird.pos.y , bird.size.x,bird.size.y };
+    }
 }
