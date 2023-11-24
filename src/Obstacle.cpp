@@ -77,55 +77,65 @@ void InitRandom()
 //    pair.top.pos = { static_cast<float>(GetScreenWidth()), 0 };
 //    pair.bottom.pos = { static_cast<float>(GetScreenWidth()), pair.top.size.y + 200.0f }; // Espacio de 200 entre los obstáculos
 //}
-Obstacle CreateObstacle(float posX)
+Obstacle CreateObstacle()
 {
     Obstacle obstacle;
-    obstacle.size = { 150.0f, 400.0f };
+    /*obstacle.size = { 150.0f, 400.0f };
     obstacle.speed = 150.0f;
     obstacle.color = BLUE;
     obstacle.hit = false;
-    obstacle.pos = { posX, 0.0f };
+    obstacle.pos = { posX, 0.0f };*/
+    obstacle.pipeUp = initPipeUp();
+    obstacle.pipeDown = initPipeDown();
+    obstacle.pipeUp.pos = { static_cast<float>(GetScreenWidth() - 100), 0.0f};
+    obstacle.pipeDown.pos = { static_cast<float>(GetScreenWidth() - 100), static_cast<float>(GetScreenHeight() - 100) };
+    obstacle.speed = 150.0f;
+    obstacle.isHit = false;
 
     return obstacle;
 }
 
-Obstacle CreateObstacle2(float posX)
-{
-    Obstacle obstacle;
-    obstacle.size = { 150.0f, 400.0f };
-    obstacle.speed = 150.0f;
-    obstacle.color = BLUE;
-    obstacle.hit = false;
-    obstacle.pos = { posX, static_cast<float>(GetScreenHeight() - 100) };
-
-    return obstacle;
-}
+//Obstacle CreateObstacle2(float posX)
+//{
+//    Obstacle obstacle;
+//    obstacle.size = { 150.0f, 400.0f };
+//    obstacle.speed = 150.0f;
+//    obstacle.color = BLUE;
+//    obstacle.hit = false;
+//    obstacle.pos = { posX, static_cast<float>(GetScreenHeight() - 100) };
+//
+//    return obstacle;
+//}
 
 void MoveObstacle(Obstacle& obstacle)
 { 
-    obstacle.pos.x -= obstacle.speed * GetFrameTime();
+    obstacle.pipeUp.pos.x -= obstacle.speed * GetFrameTime();
+    obstacle.pipeDown.pos.x -= obstacle.speed * GetFrameTime();
 
-    if (obstacle.pos.x + obstacle.size.x < 0)
+    if (obstacle.pipeUp.pos.x + obstacle.pipeUp.size.x < 0 && obstacle.pipeDown.pos.x + obstacle.pipeDown.size.x < 0)
     {
-        obstacle.pos.x = static_cast<float>(GetScreenWidth());
-        obstacle.pos.y = static_cast<float>(obstacle.pos.y);
+        obstacle.pipeUp.pos.x = static_cast<float>(GetScreenWidth());
+        obstacle.pipeUp.pos.y = static_cast<float>(obstacle.pipeUp.pos.y);
+        obstacle.pipeDown.pos.x = static_cast<float>(GetScreenWidth());
+        obstacle.pipeDown.pos.y = static_cast<float>(obstacle.pipeDown.pos.y);
     }
 }
 
-void MoveObstacle2(Obstacle& obstacle)
-{
-    obstacle.pos.x -= obstacle.speed * GetFrameTime();
-
-    if (obstacle.pos.x + obstacle.size.x < 0)
-    {
-        obstacle.pos.x = static_cast<float>(GetScreenWidth());
-        obstacle.pos.y = static_cast<float>(GetScreenHeight() - 100);
-    }
-}
+//void MoveObstacle2(Obstacle& obstacle)
+//{
+//    obstacle.pos.x -= obstacle.speed * GetFrameTime();
+//
+//    if (obstacle.pos.x + obstacle.size.x < 0)
+//    {
+//        obstacle.pos.x = static_cast<float>(GetScreenWidth());
+//        obstacle.pos.y = static_cast<float>(GetScreenHeight() - 100);
+//    }
+//}
 
 void DrawObstacle(Obstacle& obstacle)
 {
-	DrawRectangle(static_cast<int>(obstacle.pos.x) , static_cast<int>(obstacle.pos.y) , static_cast<int>(obstacle.size.x), static_cast<int>(obstacle.size.y),obstacle.color);
+	DrawRectangle(static_cast<int>(obstacle.pipeUp.pos.x) , static_cast<int>(obstacle.pipeUp.pos.y) , static_cast<int>(obstacle.pipeUp.size.x), static_cast<int>(obstacle.pipeUp.size.y),obstacle.pipeUp.color);
+    DrawRectangle(static_cast<int>(obstacle.pipeDown.pos.x), static_cast<int>(obstacle.pipeDown.pos.y), static_cast<int>(obstacle.pipeDown.size.x), static_cast<int>(obstacle.pipeDown.size.y), obstacle.pipeDown.color);
 }
 
 void UpdateObstacle(Obstacle& obstacle)
@@ -133,18 +143,24 @@ void UpdateObstacle(Obstacle& obstacle)
 	MoveObstacle(obstacle);
 }
 
-void UpdateObstacle2(Obstacle& obstacle)
+//void UpdateObstacle2(Obstacle& obstacle)
+//{
+//    MoveObstacle2(obstacle);
+//}
+
+Rectangle GetRecObstacleUp(Obstacle& obstacle)
 {
-    MoveObstacle2(obstacle);
+	return Rectangle{ obstacle.pipeUp.pos.x , obstacle.pipeUp.pos.y , obstacle.pipeUp.size.x, obstacle.pipeUp.size.y };
 }
 
-Rectangle GetRecObstacle(Obstacle& obstacle)
+Rectangle GetRecObstacleDown(Obstacle& obstacle)
 {
-	return Rectangle{ obstacle.pos.x , obstacle.pos.y , obstacle.size.x, obstacle.size.y };
+    return Rectangle{ obstacle.pipeDown.pos.x , obstacle.pipeDown.pos.y , obstacle.pipeDown.size.x, obstacle.pipeDown.size.y };
 }
 
 void ResetObject(Obstacle obstacle)
 {
     InitRandom();
-    obstacle.pos = { static_cast<float>(obstacle.pos.x), static_cast<float>(obstacle.pos.y) };
+    obstacle.pipeUp.pos = { static_cast<float>(obstacle.pipeUp.pos.x), static_cast<float>(obstacle.pipeUp.pos.y) };
+    obstacle.pipeDown.pos = { static_cast<float>(obstacle.pipeDown.pos.x), static_cast<float>(obstacle.pipeDown.pos.y) };
 }

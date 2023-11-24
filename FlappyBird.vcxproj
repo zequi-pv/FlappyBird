@@ -157,6 +157,7 @@
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\Obstacle.cpp" />
     <ClCompile Include="src\Parallax.cpp" />
+    <ClCompile Include="src\Pipe.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Bird.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="src\Menu.h" />
     <ClInclude Include="src\Obstacle.h" />
     <ClInclude Include="src\Parallax.h" />
+    <ClInclude Include="src\Pipe.h" />
     <ClInclude Include="src\WindowSize.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

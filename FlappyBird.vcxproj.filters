@@ -33,6 +33,9 @@
     <ClCompile Include="src\Menu.cpp">
       <Filter>Source\ScreenManager</Filter>
     </ClCompile>
+    <ClCompile Include="src\Pipe.cpp">
+      <Filter>Source\Elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Bird.h">
@@ -51,6 +54,9 @@
       <Filter>Source\ScreenManager</Filter>
     </ClInclude>
     <ClInclude Include="src\WindowSize.h">
+      <Filter>Source\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pipe.h">
       <Filter>Source\Elements</Filter>
     </ClInclude>
   </ItemGroup>

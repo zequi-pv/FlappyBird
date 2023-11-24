@@ -1,23 +1,24 @@
 #include "raylib.h"
+#include "Pipe.h"
 
 struct Obstacle
 {
-	Vector2 pos;
-	Vector2 size;
+	Pipe pipeUp;
+	Pipe pipeDown;
 	float speed;
-	Color color;
-	bool hit;
+	bool isHit;
 };
 
 void InitRandom();
-Obstacle CreateObstacle(float posX);
-Obstacle CreateObstacle2(float posX);
+Obstacle CreateObstacle();
+//Obstacle CreateObstacle2(float posX);
 void MoveObstacle(Obstacle& obstacle);
-void MoveObstacle2(Obstacle& obstacle);
+//void MoveObstacle2(Obstacle& obstacle);
 void DrawObstacle(Obstacle& obstacle);
 void UpdateObstacle(Obstacle& obstacle);
-void UpdateObstacle2(Obstacle& obstacle);
-Rectangle GetRecObstacle(Obstacle& obstacle);
+//void UpdateObstacle2(Obstacle& obstacle);
+Rectangle GetRecObstacleUp(Obstacle& obstacle);
+Rectangle GetRecObstacleDown(Obstacle& obstacle);
 void ResetObject(Obstacle obstacle);
 
 //#include "raylib.h"
