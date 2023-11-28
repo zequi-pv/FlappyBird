@@ -1,7 +1,7 @@
 #include <String>
-#include"raylib.h"
-#include"Menu.h"
-#include"Game.h"
+#include "raylib.h"
+#include "Menu.h"
+#include "Game.h"
 //#include"WindowSize.h"
 
 using namespace std;
@@ -15,7 +15,7 @@ namespace game
 	extern bool isGameRunning;
 	static int fontSize = 40;
 	static int verticalSpacing = 120;
-
+	/*Texture2D background = LoadTexture("res/menuBackground.jpg");*/
 
 	void InitializeTexts()
 	{
@@ -232,10 +232,11 @@ namespace game
 		}
 	}
 
-	void DrawButtons()
+	void DrawButtons(Texture2D menuBack)
 	{
 		BeginDrawing();
-		DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, static_cast <int>(GetScreenWidth()), static_cast <int>(GetScreenHeight()), BLACK, Fade(RED, 1.0f));
+		//DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, static_cast <int>(GetScreenWidth()), static_cast <int>(GetScreenHeight()), BLACK, Fade(RED, 1.0f));
+		DrawTexture(menuBack, 0, 0, RAYWHITE);
 
 		if (menu == MenuScenes::Instructions || menu == MenuScenes::Credits)
 		{
@@ -250,18 +251,18 @@ namespace game
 			DrawQuit();
 			DrawVersion();
 		}
-
+		
 		EndDrawing();
 	}
 
-	void ScenesSwitch()
+	void ScenesSwitch(Texture2D menuBack)
 	{
 		switch (menu)
 		{
 		case MenuScenes::MainMenu:
 
 			UpdateMenu();
-			DrawButtons();
+			DrawButtons(menuBack);
 
 			break;
 

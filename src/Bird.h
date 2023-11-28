@@ -12,10 +12,11 @@ namespace game
         float speed;
         float aceleration;
         float gravity;
+        bool isJumping;
     };
 
     Bird CreateBird(Texture2D birdTexture);
-    void DrawBird(Bird bird);
+    void DrawBird(Bird& bird, Texture2D playerTex2);
     void MoveBird(Bird& bird);
     void MoveBird2(Bird& bird);
     void UpdateBird(Bird& bird);

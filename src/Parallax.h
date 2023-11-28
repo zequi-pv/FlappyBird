@@ -10,17 +10,14 @@ namespace game
 		Vector2 pos;
 		float scale;
 	};
-	Parallax foreGround;
+	/*Parallax foreGround;
 	Parallax midGround;
-	Parallax backGround;
+	Parallax backGround;*/
 
-	float scrollingBack = 0.0f;
-	float scrollingMid = 0.0f;
-	float scrollingFore = 0.0f;
+	
 
-	void initializeParallax();
-	void moveParallax();
-	void drawParallax(Texture2D& background, Texture2D& foreground);
+	/*void initializeParallax();*/
+	void drawParallax(float scrollingBack, float scrollingMid, float scrollingFore, Parallax foreGround, Parallax midGround, Parallax backGround);
 
 	Parallax InitParallax(Texture2D parallax);
 	void DrawParallax(Parallax image);

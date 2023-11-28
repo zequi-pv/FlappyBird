@@ -24,9 +24,6 @@
     <ClCompile Include="src\Obstacle.cpp">
       <Filter>Source\Elements</Filter>
     </ClCompile>
-    <ClCompile Include="src\Parallax.cpp">
-      <Filter>Source\Elements</Filter>
-    </ClCompile>
     <ClCompile Include="src\Game.cpp">
       <Filter>Source\GameData</Filter>
     </ClCompile>
@@ -36,6 +33,9 @@
     <ClCompile Include="src\Pipe.cpp">
       <Filter>Source\Elements</Filter>
     </ClCompile>
+    <ClCompile Include="src\Parallax.cpp">
+      <Filter>Source\ScreenManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Bird.h">
@@ -44,20 +44,20 @@
     <ClInclude Include="src\Obstacle.h">
       <Filter>Source\Elements</Filter>
     </ClInclude>
-    <ClInclude Include="src\Parallax.h">
-      <Filter>Source\Elements</Filter>
-    </ClInclude>
     <ClInclude Include="src\Game.h">
       <Filter>Source\GameData</Filter>
     </ClInclude>
     <ClInclude Include="src\Menu.h">
       <Filter>Source\ScreenManager</Filter>
     </ClInclude>
-    <ClInclude Include="src\WindowSize.h">
-      <Filter>Source\Elements</Filter>
-    </ClInclude>
     <ClInclude Include="src\Pipe.h">
       <Filter>Source\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Parallax.h">
+      <Filter>Source\ScreenManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WindowSize.h">
+      <Filter>Source\ScreenManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

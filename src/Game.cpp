@@ -18,16 +18,22 @@ namespace game
 	void DrawPause();
 
 	const int obstaclesQtty = 3;
+	float scrollingBack = 0.0f;
+	float scrollingMid = 0.0f;
+	float scrollingFore = 0.0f;
 
 	Texture2D playerTexture;
+	Texture2D playerTexture2;
+	
 	Bird bird;
 	Bird bird2;
-	Obstacle obstacle;
+	Obstacle obstacle = {};
 	Obstacle obstacles[obstaclesQtty];
-	Texture2D imageTexture;
-	//Parallax foreGround;
-	//Parallax midGround[2];
-	//Parallax backGround;
+	Image icon;
+	Texture2D menuBack;
+	Parallax foreGround;
+	Parallax midGround;
+	Parallax backGround;
 
 	static bool exitWindow = false;
 	static bool pause = false;
@@ -50,13 +56,16 @@ namespace game
 
 		InitWindow(static_cast<int>(screenWidth), static_cast<int>(screenHeight), "ASTEROIDS");
 		SetExitKey(KEY_NULL);
+		icon = LoadImage("res/eagleOne.png");
+		SetWindowIcon(icon);
 		InitializeTexts();
 
-		//backGround = LoadTexture("res/Background/sCitySky.png");
-	   //Texture2D midGround = LoadTexture("res/Background/sCityMid.png");
-		imageTexture = LoadTexture("res/Background/sCityClose.png");
-		//foreGround = InitParallax(imageTexture);
-		playerTexture = LoadTexture("res/playerShip2_orange.png");
+		backGround.texture = LoadTexture("res/Sky.png");
+		midGround.texture = LoadTexture("res/MountainsOne.png");
+		foreGround.texture = LoadTexture("res/MountainsTwo.png");
+		menuBack = LoadTexture("res/menuBackground.png");
+		playerTexture = LoadTexture("res/eagleOne.png");
+		playerTexture2 = LoadTexture("res/eagleTwo.png");
 		bird = CreateBird(playerTexture);
 		bird2 = CreateBird(playerTexture);
 		for (int i = 0; i < obstaclesQtty; i++)
@@ -76,7 +85,7 @@ namespace game
 		{
 			while (!WindowShouldClose() && !isGameRunning)
 			{
-				ScenesSwitch();
+				ScenesSwitch(menuBack);
 				exitWindow = true;
 			}
 		}
@@ -108,16 +117,17 @@ namespace game
 	void Close()
 	{
 		UnloadTexture(playerTexture);
-		UnloadTexture(imageTexture);
-		///UnloadTexture(backGround);0
-		/*UnloadTexture(playerTexture);*/
+		UnloadTexture(playerTexture2);
+		UnloadTexture(backGround.texture);
+		UnloadTexture(midGround.texture);
+		UnloadTexture(foreGround.texture);
 		CloseWindow();
 	}
 
 	void Draw()
 	{
 		BeginDrawing();
-		ClearBackground(BLACK);
+		ClearBackground(RAYWHITE);
 		if (!endmatch)
 		{
 			if (pause)
@@ -126,9 +136,9 @@ namespace game
 			}
 			else
 			{
-				//DrawParallax(foreGround);
+				drawParallax(scrollingBack, scrollingMid, scrollingFore, foreGround, midGround, backGround);
 				DrawRectangleRec(GetBirdRect(bird), BLACK);
-				DrawBird(bird);
+				DrawBird(bird, playerTexture2);
 				for (int i = 0; i < obstaclesQtty; i++)
 				{
 					DrawObstacle(obstacles[i]);
@@ -153,8 +163,8 @@ namespace game
 				//DrawParallax(foreGround);
 				DrawRectangleRec(GetBirdRect(bird), BLACK);
 				DrawRectangleRec(GetBirdRect(bird2), BLACK);
-				DrawBird(bird);
-				DrawBird(bird2);
+				DrawBird(bird, playerTexture2);
+				DrawBird(bird2, playerTexture2);
 				for (int i = 0; i < obstaclesQtty; i++)
 				{
 					DrawObstacle(obstacles[i]);
@@ -340,12 +350,12 @@ namespace game
 				{
 					obs[i].isHit = true;
 					player.vidas -= 1;
-					player.color = BLUE;
+					player.color = RAYWHITE;
 					player.speed = 0.0f;
 					collisionTimer = 1.0f;
 
 					// Restablecer la posición del jugador
-					player.pos = { static_cast<float>(GetScreenWidth() / 2) - 500, static_cast<float>(GetScreenHeight() / 2) };
+					player.pos = { static_cast<float>(GetScreenWidth() / 2) - 400, static_cast<float>(GetScreenHeight() / 2) };
 
 					/*#ifdef _DEBUG
 					cout << "vidas: " << player.vidas << endl;
@@ -366,7 +376,6 @@ namespace game
 				if (collisionTimer <= 0.0f)
 				{
 					obs[i].isHit = false;
-					player.color = RED;
 				}
 
 			}
@@ -423,9 +432,9 @@ namespace game
 
 	void DrawPause()
 	{
-		BeginDrawing();
+		//BeginDrawing();
 
-		DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, 1024, 768, BLACK, Fade(RED, 1.0f));
+		DrawRectangleGradientV(GetScreenWidth() / 2 - 256, GetScreenHeight() / 2 - 192, 512, 384, BLACK, Fade(RED, 1.0f));
 		DrawText("Pause", GetScreenWidth() / 2 - 140, GetScreenHeight() / 2 - 250, 100, WHITE);
 		DrawText("Press (P) to continue the game ", GetScreenWidth() / 2 - 330, GetScreenHeight() / 2, 38, WHITE);
 		DrawText("Press (R) to restart the game ", GetScreenWidth() / 2 - 330, GetScreenHeight() / 2 - 100, 38, WHITE);
@@ -433,6 +442,6 @@ namespace game
 		DrawBack();
 
 
-		EndDrawing();
+		//EndDrawing();
 	}
 }

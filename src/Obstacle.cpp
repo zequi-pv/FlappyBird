@@ -1,5 +1,5 @@
 #include "Obstacle.h"
-#include<iostream>
+#include <iostream>
 #include <ctime>
 
 using namespace std;

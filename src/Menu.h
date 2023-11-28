@@ -33,8 +33,8 @@ namespace game
 	void CheckInstructions();
 	void CheckCredits();
 	void CheckQuit();
-	void ScenesSwitch();
-	void DrawButtons();
+	void ScenesSwitch(Texture2D menuBack);
+	void DrawButtons(Texture2D menuBack);
 	void DrawSinglePlayer();
 	void DrawMultiPlayer();
 	void DrawInstruction();
