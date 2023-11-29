@@ -102,7 +102,7 @@ namespace game
 
 	void DrawVersion()
 	{
-		DrawText(TextFormat("Version 0.3"), GetScreenWidth() / 2 - 500, GetScreenHeight() / 2 + 350, 25, BLACK);
+		DrawText(TextFormat("Version 0.2"), GetScreenWidth() / 2 - 500, GetScreenHeight() / 2 + 350, 25, BLACK);
 	}
 
 	void DrawSinglePlayer()

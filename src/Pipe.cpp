@@ -2,12 +2,13 @@
 
 namespace game
 {
-	Pipe initPipe()
+	Pipe initPipe(Texture2D texture)
 	{
 		Pipe pipe;
 		pipe.pos = { 0,0 };
 		pipe.size = { 100.0f, 400.0f };
-		pipe.color = RED;
+		pipe.texture = texture;
+		pipe.color = RAYWHITE;
 		return pipe;
 	}
 }

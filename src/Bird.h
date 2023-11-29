@@ -9,6 +9,7 @@ namespace game
         Vector2 size;
         Color color;
         short int vidas;
+        int score;
         float speed;
         float aceleration;
         float gravity;

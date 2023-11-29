@@ -11,7 +11,7 @@ namespace game
 		bool isHit;
 	};
 
-	Obstacle CreateObstacle();
+	Obstacle CreateObstacle(Texture2D obstacleDown, Texture2D obstacleUp);
 	void MoveObstacle(Obstacle& obstacle);
 	void DrawObstacle(Obstacle& obstacle);
 	Rectangle GetRecObstacleUp(Obstacle& obstacle);

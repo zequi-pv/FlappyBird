@@ -4,22 +4,5 @@
 
 namespace game
 {
-	struct Parallax
-	{
-		Texture2D texture;
-		Vector2 pos;
-		float scale;
-	};
-	/*Parallax foreGround;
-	Parallax midGround;
-	Parallax backGround;*/
-
-	
-
-	/*void initializeParallax();*/
-	void drawParallax(float scrollingBack, float scrollingMid, float scrollingFore, Parallax foreGround, Parallax midGround, Parallax backGround);
-
-	Parallax InitParallax(Texture2D parallax);
-	void DrawParallax(Parallax image);
-
+	void drawParallax(float& scrollingBack, float& scrollingMid, float& scrollingFore, Texture2D foreGround, Texture2D midGround, Texture2D backGround, bool paused);
 }

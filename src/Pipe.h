@@ -7,8 +7,9 @@ namespace game
 	{
 		Vector2 size;
 		Vector2 pos;
+		Texture2D texture;
 		Color color;
 	};
 
-	Pipe initPipe();
+	Pipe initPipe(Texture2D texture);
 }

@@ -13,6 +13,7 @@ namespace game
         bird.pos = { static_cast<float>(GetScreenWidth() / 2) - 400, static_cast<float> (GetScreenHeight() / 2) };
         bird.size = { 90,90 };
         bird.vidas = 3;
+        bird.score = 0;
         bird.speed = 0.0f;
         bird.aceleration = 0.0f;
         bird.gravity = 400.0f;

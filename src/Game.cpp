@@ -24,6 +24,9 @@ namespace game
 
 	Texture2D playerTexture;
 	Texture2D playerTexture2;
+
+	Texture2D obstacleDown;
+	Texture2D obstacleUp;
 	
 	Bird bird;
 	Bird bird2;
@@ -31,9 +34,13 @@ namespace game
 	Obstacle obstacles[obstaclesQtty];
 	Image icon;
 	Texture2D menuBack;
-	Parallax foreGround;
+	Texture2D backGround;
+	Texture2D midGround;
+	Texture2D foreGround;
+	Texture2D sky;
+	/*Parallax foreGround;
 	Parallax midGround;
-	Parallax backGround;
+	Parallax backGround;*/
 
 	static bool exitWindow = false;
 	static bool pause = false;
@@ -43,9 +50,12 @@ namespace game
 
 	void RunGame()
 	{
+		
 		Init();
+		
 		MainLoop();
 		Close();
+		
 	}
 
 
@@ -60,17 +70,21 @@ namespace game
 		SetWindowIcon(icon);
 		InitializeTexts();
 
-		backGround.texture = LoadTexture("res/Sky.png");
-		midGround.texture = LoadTexture("res/MountainsOne.png");
-		foreGround.texture = LoadTexture("res/MountainsTwo.png");
+		backGround = LoadTexture("res/Clouds.png");
+		midGround = LoadTexture("res/MountainsOne.png");
+		foreGround = LoadTexture("res/MountainsTwo.png");
 		menuBack = LoadTexture("res/menuBackground.png");
+		sky = LoadTexture("res/Sky.png");
 		playerTexture = LoadTexture("res/eagleOne.png");
 		playerTexture2 = LoadTexture("res/eagleTwo.png");
+		obstacleUp = LoadTexture("res/ObstaculoTwo.png");
+		obstacleDown = LoadTexture("res/Obstaculo.png");
+
 		bird = CreateBird(playerTexture);
 		bird2 = CreateBird(playerTexture);
 		for (int i = 0; i < obstaclesQtty; i++)
 		{
-			obstacle = CreateObstacle();
+			obstacle = CreateObstacle(obstacleDown, obstacleUp);
 			obstacles[i] = obstacle;
 
 			obstacles[i].pipeUp.pos.x = static_cast<float>(GetScreenWidth()) + 500.0f * i;
@@ -118,26 +132,35 @@ namespace game
 	{
 		UnloadTexture(playerTexture);
 		UnloadTexture(playerTexture2);
-		UnloadTexture(backGround.texture);
-		UnloadTexture(midGround.texture);
-		UnloadTexture(foreGround.texture);
+		UnloadTexture(backGround);
+		UnloadTexture(midGround);
+		UnloadTexture(foreGround);
 		CloseWindow();
 	}
 
 	void Draw()
 	{
 		BeginDrawing();
-		ClearBackground(RAYWHITE);
+		 ClearBackground(RAYWHITE);
 		if (!endmatch)
 		{
 			if (pause)
 			{
+				DrawTexture(sky, 0, 0, RAYWHITE);
+				drawParallax(scrollingBack, scrollingMid, scrollingFore, foreGround, midGround, backGround, pause);
+				//DrawRectangleRec(GetBirdRect(bird), BLACK);
+				DrawBird(bird, playerTexture2);
+				for (int i = 0; i < obstaclesQtty; i++)
+				{
+					DrawObstacle(obstacles[i]);
+				}
 				DrawPause();
 			}
 			else
 			{
-				drawParallax(scrollingBack, scrollingMid, scrollingFore, foreGround, midGround, backGround);
-				DrawRectangleRec(GetBirdRect(bird), BLACK);
+				DrawTexture(sky, 0, 0, RAYWHITE);
+				drawParallax(scrollingBack, scrollingMid, scrollingFore, foreGround, midGround, backGround, pause);
+				//DrawRectangleRec(GetBirdRect(bird), BLACK);
 				DrawBird(bird, playerTexture2);
 				for (int i = 0; i < obstaclesQtty; i++)
 				{
@@ -183,6 +206,10 @@ namespace game
 			{
 				pause = true;
 			}
+			if (IsKeyPressed(KEY_BACKSPACE))
+			{
+				pause = false;
+			}
 			if (!pause)
 			{
 				Update();
@@ -196,7 +223,7 @@ namespace game
 					bird = CreateBird(playerTexture);
 					for (int i = 0; i < obstaclesQtty; i++)
 					{
-						obstacle = CreateObstacle();
+						obstacle = CreateObstacle(obstacleDown, obstacleUp);
 						obstacles[i] = obstacle;
 					}
 					pause = false;
@@ -207,7 +234,7 @@ namespace game
 					bird = CreateBird(playerTexture);
 					for (int i = 0; i < obstaclesQtty; i++)
 					{
-						obstacle = CreateObstacle();
+						obstacle = CreateObstacle(obstacleDown, obstacleUp);
 						obstacles[i] = obstacle;
 					}
 					pause = false;
@@ -226,7 +253,7 @@ namespace game
 				bird = CreateBird(playerTexture);
 				for (int i = 0; i < obstaclesQtty; i++)
 				{
-					obstacle = CreateObstacle();
+					obstacle = CreateObstacle(obstacleDown, obstacleUp);
 					obstacles[i] = obstacle;
 
 					obstacles[i].pipeUp.pos.x = static_cast<float>(GetScreenWidth()) + 500.0f * i;
@@ -241,7 +268,7 @@ namespace game
 				bird = CreateBird(playerTexture);
 				for (int i = 0; i < obstaclesQtty; i++)
 				{
-					obstacle = CreateObstacle();
+					obstacle = CreateObstacle(obstacleDown, obstacleUp);
 					obstacles[i] = obstacle;
 
 					obstacles[i].pipeUp.pos.x = static_cast<float>(GetScreenWidth()) + 500.0f * i;
@@ -280,7 +307,7 @@ namespace game
 					bird2 = CreateBird(playerTexture);
 					for (int i = 0; i < obstaclesQtty; i++)
 					{
-						obstacle = CreateObstacle();
+						obstacle = CreateObstacle(obstacleDown, obstacleUp);
 						obstacles[i] = obstacle;
 					}
 					pause = false;
@@ -292,7 +319,7 @@ namespace game
 					bird2 = CreateBird(playerTexture);
 					for (int i = 0; i < obstaclesQtty; i++)
 					{
-						obstacle = CreateObstacle();
+						obstacle = CreateObstacle(obstacleDown, obstacleUp);
 						obstacles[i] = obstacle;
 					}
 					pause = false;
@@ -312,7 +339,7 @@ namespace game
 				bird2 = CreateBird(playerTexture);
 				for (int i = 0; i < obstaclesQtty; i++)
 				{
-					obstacle = CreateObstacle();
+					obstacle = CreateObstacle(obstacleDown, obstacleUp);
 					obstacles[i] = obstacle;
 				}
 				pause = false;
@@ -325,7 +352,7 @@ namespace game
 				bird2 = CreateBird(playerTexture);
 				for (int i = 0; i < obstaclesQtty; i++)
 				{
-					obstacle = CreateObstacle();
+					obstacle = CreateObstacle(obstacleDown, obstacleUp);
 					obstacles[i] = obstacle;
 				}
 				pause = false;
@@ -414,7 +441,8 @@ namespace game
 		BeginDrawing();
 
 		DrawRectangleGradientV(GetScreenWidth() / 2 - 512, GetScreenHeight() / 2 - 384, 1024, 768, BLACK, Fade(RED, 1.0f));
-		DrawText("Code by: Leonardo Brizuela", GetScreenWidth() / 2 - 300, GetScreenHeight() / 2 - 10, 40, WHITE);
+		DrawText("Code by: Leonardo Brizuela and Ezequiel Prieto", GetScreenWidth() / 2 - 300, GetScreenHeight() / 2 - 10, 40, WHITE);
+		DrawText("Art by: Fiorella Gaston", GetScreenWidth() / 2 - 300, GetScreenHeight() / 2 + 30, 40, WHITE);
 		//DrawText("(ESC) Back", GetScreenWidth() / 2 - 350, GetScreenHeight() / 2 + 200, 40, WHITE);
 		DrawBack();
 		CheckBack();
@@ -432,16 +460,11 @@ namespace game
 
 	void DrawPause()
 	{
-		//BeginDrawing();
-
 		DrawRectangleGradientV(GetScreenWidth() / 2 - 256, GetScreenHeight() / 2 - 192, 512, 384, BLACK, Fade(RED, 1.0f));
-		DrawText("Pause", GetScreenWidth() / 2 - 140, GetScreenHeight() / 2 - 250, 100, WHITE);
-		DrawText("Press (P) to continue the game ", GetScreenWidth() / 2 - 330, GetScreenHeight() / 2, 38, WHITE);
-		DrawText("Press (R) to restart the game ", GetScreenWidth() / 2 - 330, GetScreenHeight() / 2 - 100, 38, WHITE);
-		DrawText("Press (ESC) back to menu ", GetScreenWidth() / 2 - 330, GetScreenHeight() / 2 - 50, 38, WHITE);
+		DrawText("Pause", GetScreenWidth() / 2 - 140, GetScreenHeight() / 2 - 200, 100, WHITE);
+		DrawText("Press (P) to continue the game ", GetScreenWidth() / 2 - 250, GetScreenHeight() / 2, 25, WHITE);
+		DrawText("Press (R) to restart the game ", GetScreenWidth() / 2 - 250, GetScreenHeight() / 2 - 100, 25, WHITE);
+		DrawText("Press (ESC) back to menu ", GetScreenWidth() / 2 - 250, GetScreenHeight() / 2 - 50, 25, WHITE);
 		DrawBack();
-
-
-		//EndDrawing();
 	}
 }
