@@ -11,8 +11,8 @@ namespace game
     {
         Bird bird;
         bird.pos = { static_cast<float>(GetScreenWidth() / 2) - 400, static_cast<float> (GetScreenHeight() / 2) };
-        bird.size = { 90,90 };
-        bird.vidas = 3;
+        bird.size = { 90,70 };
+        bird.lives = 3;
         bird.score = 0;
         bird.speed = 0.0f;
         bird.aceleration = 0.0f;
@@ -26,10 +26,6 @@ namespace game
 
     void DrawBird(Bird& bird, Texture2D playerTex2)
     {
-        #ifdef _DEBUG
-        DrawRectangle(static_cast<int>(bird.pos.x), static_cast<int>(bird.pos.y), static_cast<int>(bird.size.x), static_cast<int>(bird.size.y), bird.color);
-        #endif
-
         if (bird.isJumping)
         {
             DrawTexture(playerTex2, static_cast<int>(bird.pos.x), static_cast<int>(bird.pos.y), bird.color);
@@ -40,7 +36,7 @@ namespace game
         }
     }
 
-    void MoveBird(Bird& bird)
+    void MoveBird(Bird& bird, Sound jumpS)
     {
         if (bird.pos.y < 0)
         {
@@ -48,10 +44,10 @@ namespace game
         }
         if (IsKeyPressed(KEY_W))
         {
+            PlaySound(jumpS);
             bird.aceleration = 0.0f;
             bird.speed = bird.gravity / 2;
             bird.isJumping = true;
-
         }
         else
         {
@@ -67,7 +63,7 @@ namespace game
         }
     }
 
-    void MoveBird2(Bird& bird)
+    void MoveBird2(Bird& bird, Sound jumpS)
     {
         if (bird.pos.y < 0)
         {
@@ -75,6 +71,7 @@ namespace game
         }
         if (IsKeyPressed(KEY_UP))
         {
+            PlaySound(jumpS);
             bird.aceleration = 0.0f;
             bird.speed = bird.gravity / 2;
             bird.isJumping = true;
@@ -84,7 +81,7 @@ namespace game
             if (bird.aceleration >= bird.gravity)
             {
                 bird.aceleration = bird.gravity;
-                bird.isJumping = true;
+                bird.isJumping = false;
             }
 
             bird.aceleration += bird.gravity * GetFrameTime();
@@ -93,14 +90,14 @@ namespace game
         }
     }
 
-    void UpdateBird(Bird& bird)
+    void UpdateBird(Bird& bird, Sound jumpS)
     {
-        MoveBird(bird);
+        MoveBird(bird, jumpS);
     }
 
-    void UpdateBird2(Bird& bird)
+    void UpdateBird2(Bird& bird, Sound jumpS)
     {
-        MoveBird2(bird);
+        MoveBird2(bird, jumpS);
     }
 
     Rectangle GetBirdRect(Bird bird)

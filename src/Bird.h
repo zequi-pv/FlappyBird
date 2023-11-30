@@ -8,7 +8,7 @@ namespace game
         Texture2D texture;
         Vector2 size;
         Color color;
-        short int vidas;
+        short int lives;
         int score;
         float speed;
         float aceleration;
@@ -16,12 +16,13 @@ namespace game
         bool isJumping;
     };
 
+
     Bird CreateBird(Texture2D birdTexture);
     void DrawBird(Bird& bird, Texture2D playerTex2);
-    void MoveBird(Bird& bird);
-    void MoveBird2(Bird& bird);
-    void UpdateBird(Bird& bird);
-    void UpdateBird2(Bird& bird);
+    void MoveBird(Bird& bird, Sound jumpS);
+    void MoveBird2(Bird& bird, Sound jumpS);
+    void UpdateBird(Bird& bird, Sound jumpS);
+    void UpdateBird2(Bird& bird, Sound jumpS);
     Rectangle GetBirdRect(Bird bird);
-    void BirdInput(Bird bird);
+    
 }

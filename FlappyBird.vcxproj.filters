@@ -36,6 +36,12 @@
     <ClCompile Include="src\Parallax.cpp">
       <Filter>Source\ScreenManager</Filter>
     </ClCompile>
+    <ClCompile Include="src\Utils.cpp">
+      <Filter>Source\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Button.cpp">
+      <Filter>Source\Elements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Bird.h">
@@ -58,6 +64,12 @@
     </ClInclude>
     <ClInclude Include="src\WindowSize.h">
       <Filter>Source\ScreenManager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utils.h">
+      <Filter>Source\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Button.h">
+      <Filter>Source\Elements</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

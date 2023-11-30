@@ -17,31 +17,6 @@ namespace game
 	};
 	extern MenuScenes menu;
 
-	struct Buttons
-	{
-		string text{};
-		Vector2 pos{};
-		int fontSize{};
-
-		Rectangle backgroundBttn{};
-	};
-	extern Buttons Texto[5];
-
-	void InitializeTexts();
-	void CheckSinglePlayer();
-	void CheckMultiPlayer();
-	void CheckInstructions();
-	void CheckCredits();
-	void CheckQuit();
-	void ScenesSwitch(Texture2D menuBack);
-	void DrawButtons(Texture2D menuBack);
-	void DrawSinglePlayer();
-	void DrawMultiPlayer();
-	void DrawInstruction();
-	void DrawCredits();
-	void CheckBack();
-	void DrawBack();
-	void DrawVersion();
-
-	void DrawQuit();
+	void ScenesSwitch();
+	
 }
